@@ -87,7 +87,7 @@ export default class Container extends React.Component {
     render() {
         return (
             <div className="container">
-                {this.state.openNoteModal ? <div className="modal-background"/> : null}
+                {this.state.openNoteModal || this.state.openDeleteModal ? <div className="modal-background"/> : null}
                 <Header addNote={this.handleAddNoteClick} />
                 <Body notes={this.state.notes} editNote={this.handleEditNoteClick} deleteNote={this.handleDeleteNoteClick} />
                 <Note

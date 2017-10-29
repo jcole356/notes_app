@@ -25,6 +25,7 @@
     border-radius: 4px;
     box-shadow: 0px 0px 12px #888888;
     margin: 20px;
+    min-width: 125px;
     padding-top: 5px;
     height: 200px;
     width: 20%;
@@ -40,6 +41,10 @@
 
 .card .card-header .title {
     float: left;
+}
+
+.card .card-header .buttons {
+    min-width: 50px;
 }
 
 .card .button {

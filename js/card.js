@@ -18,8 +18,10 @@ export default class Card extends React.Component {
                 <div className="title">
                     {this.props.title}
                 </div>
-                <Button text={'Delete'} active={true} icon={'fa fa-trash-o'} onClick={this.handleDeleteNote}/>
-                <Button text={'Edit'} active={true} icon={'fa fa-pencil'} onClick={this.handleEditNote}/>
+                <div className="buttons">
+                    <Button text={'Delete'} active={true} icon={'fa fa-trash-o'} onClick={this.handleDeleteNote}/>
+                    <Button text={'Edit'} active={true} icon={'fa fa-pencil'} onClick={this.handleEditNote}/>
+                </div>
             </div>
             <div className="note-body">
                 <textarea

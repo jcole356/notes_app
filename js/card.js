@@ -22,7 +22,19 @@ export default class Card extends React.Component {
                 <Button text={'Edit'} active={true} icon={'fa fa-pencil'} onClick={this.handleEditNote}/>
             </div>
             <div className="note-body">
-                {this.props.body}
+                <textarea
+                    readOnly={true}
+                    rows={10}
+                    // TODO: add to CSS
+                    style={{
+                        border: 'none',
+                        outline: 'none',
+                        resize: 'none',
+                        width: '93%'
+                    }}
+                    value={this.props.body}
+                >
+                </textarea>
             </div>
         </div>
       )

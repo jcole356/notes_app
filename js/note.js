@@ -101,6 +101,7 @@ export default class Note extends React.Component {
                                 name="body"
                                 onChange={this.handleChange}
                                 placeholder={this.props.edit ? '' : this.props.note.body}
+                                rows={20}
                                 style={{ width: '98%' }}
                                 value={this.state.body}
                             >

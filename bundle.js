@@ -21378,7 +21378,23 @@ var Container = function (_React$Component) {
 
         _this.state = {
             note: '',
-            notes: [{ title: 'Sunday', body: 'watch football, exercise, laundry', color: 'red' }, { title: 'Monday', body: 'go to work', color: 'green' }, { title: 'Friday', body: 'Dinner, sleep', color: 'blue' }, { title: 'Saturday', body: 'Farmers Market, Watch Stranger Things', color: 'yellow' }],
+            notes: [{
+                title: 'Sunday',
+                body: 'watch football\nexercise\nlaundry',
+                color: 'red'
+            }, {
+                title: 'Monday',
+                body: 'go to work',
+                color: 'green'
+            }, {
+                title: 'Friday',
+                body: 'Dinner\nsleep',
+                color: 'blue'
+            }, {
+                title: 'Saturday',
+                body: 'Farmers Market\nWatch Stranger Things',
+                color: 'yellow'
+            }],
             openNoteModal: false,
             openDeleteModal: false
         };
@@ -21558,7 +21574,18 @@ var Card = function (_React$Component) {
                 _react2.default.createElement(
                     'div',
                     { className: 'note-body' },
-                    this.props.body
+                    _react2.default.createElement('textarea', {
+                        readOnly: true,
+                        rows: 10
+                        // TODO: add to CSS
+                        , style: {
+                            border: 'none',
+                            outline: 'none',
+                            resize: 'none',
+                            width: '93%'
+                        },
+                        value: this.props.body
+                    })
                 )
             );
         }
@@ -21851,6 +21878,7 @@ var Note = function (_React$Component) {
                                 name: 'body',
                                 onChange: this.handleChange,
                                 placeholder: this.props.edit ? '' : this.props.note.body,
+                                rows: 20,
                                 style: { width: '98%' },
                                 value: this.state.body
                             })

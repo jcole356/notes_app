@@ -62,8 +62,9 @@ export default class Note extends React.Component {
                     }}
                 >
                     <ColorPicker
-                        color={this.state.color}
-                        onChange={this.handleColorChange} />
+                        onChange={this.handleColorChange} 
+                        selected={this.state.color}
+                    />
                     <div className="formContainer">
                         <form>
                             <input

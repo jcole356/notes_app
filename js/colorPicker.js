@@ -21,14 +21,26 @@ export default class ColorPicker extends React.Component {
     }
 
     render() {
-      return (
-        <div className="color-picker">
-            {this.state.colors.map((color) => {
-                return (
-                    <div className="color" data-color={color} key={color} onClick={this.handleChange} style={{backgroundColor: color}}/>
-                )
-            })}
-        </div>
-      )
+        return (
+            <div className="color-picker">
+                {this.state.colors.map((color) => {
+                    const style = {
+                        backgroundColor: color
+                    }
+                    if (this.props.selected === color) {
+                        style.borderColor = 'black'
+                    }
+                    return (
+                        <div
+                            className="color"
+                            data-color={color}
+                            key={color}
+                            onClick={this.handleChange}
+                            style={style}
+                        />
+                    )
+                })}
+            </div>
+        )
     }
   }

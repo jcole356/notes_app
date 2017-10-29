@@ -11,10 +11,10 @@ export default class Container extends React.Component {
         this.state = {
             note: '',
             notes: [
-                { title: 'one', body: 'fishing, running, swimming', color: 'red' },
-                { title: 'two', body: 'laughing, crying, shouting', color: 'green' },
-                { title: 'three', body: 'hello, goodbye', color: 'blue' },
-                { title: 'four', body: 'GOT, TWD, BJHM', color: 'yellow' },
+                { title: 'Sunday', body: 'watch football, exercise, laundry', color: 'red' },
+                { title: 'Monday', body: 'go to work', color: 'green' },
+                { title: 'Friday', body: 'Dinner, sleep', color: 'blue' },
+                { title: 'Saturday', body: 'Farmers Market, Watch Stranger Things', color: 'yellow' },
             ],
             openNoteModal: false,
             openDeleteModal: false,

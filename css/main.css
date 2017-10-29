@@ -3,6 +3,8 @@
 .body {
     display: flex;
     flex-flow: wrap;
+    justify-content: space-around;
+    padding: 0 15px;
 }
 
 .button {

@@ -9,7 +9,7 @@ export default class Container extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            note: '', // selected note
+            note: '',
             notes: [
                 { title: 'one', body: 'fishing, running, swimming', color: 'red' },
                 { title: 'two', body: 'laughing, crying, shouting', color: 'green' },
@@ -44,7 +44,6 @@ export default class Container extends React.Component {
     }
 
     editNote = (title, body, color) => {
-        // open modal
         this.handleAddNoteClick()
         this.state.notes[this.state.note] = {title: title, body: body, color: color}
         this.setState({
@@ -95,7 +94,7 @@ export default class Container extends React.Component {
                 <Note
                     cancelNote={this.cancelNote}
                     edit={this.state.edit}
-                    note={this.state.note >= 0 ? 
+                    note={this.state.note !== '' ? 
                         this.state.notes.slice(this.state.note, this.state.note + 1)[0] : 
                         {title: "Untitled", body: "Just start typing here", color: 'red'}
                     }

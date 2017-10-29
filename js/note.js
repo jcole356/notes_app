@@ -7,31 +7,46 @@ export default class Note extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: '',
             body: '',
+            title: '',
             color: 'red',
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            color: nextProps.note.color,
-        })
+        if (nextProps.edit) {
+            this.setState({
+                body: nextProps.note.body,
+                title: nextProps.note.title,
+                color: nextProps.note.color,
+            })
+        } else {
+            this.setState({
+                color: nextProps.note.color,
+            })
+        }
     }
     
     addNote = () => {
-        const title = this.props.edit ?  (this.state.title ? this.state.title : this.props.note.title) : this.state.title
-        const body = this.props.edit ? (this.state.body ? this.state.body : this.props.note.body) : this.state.body
+        // TODO: alpha sort
         this.props.submit(
-            title, 
-            body, 
+            this.state.title, 
+            this.state.body, 
             this.state.color
         )
-        this.setState({
-            title: '',
-            body: '',
-            color: 'red'
-        })
+        this.resetDefaultState();
+    }
+    
+    editNote = () => {
+        const title = this.state.title ? this.state.title : this.props.note.title
+        const body = this.state.body ? this.state.body : this.props.note.body
+        // TODO: alpha sort
+        this.props.submit(
+            title,
+            body,
+            this.state.color
+        )
+        this.resetDefaultState();
     }
 
     handleChange = (event) => {
@@ -43,6 +58,14 @@ export default class Note extends React.Component {
     handleColorChange = (color) => {
         this.setState({
             color: color,
+        })
+    }
+
+    resetDefaultState = () => {
+        this.setState({
+            title: '',
+            body: '',
+            color: 'red'
         })
     }
 
@@ -70,24 +93,33 @@ export default class Note extends React.Component {
                             <input
                                 name="title"
                                 onChange={this.handleChange}
-                                placeholder={this.props.note.title}
+                                placeholder={this.props.edit ? '' : this.props.note.title}
                                 type="text"
                                 value={this.state.title}
                             />
                             <textarea
-                                placeholder={this.props.note.body }
                                 name="body"
                                 onChange={this.handleChange}
-                                value={this.state.body}
+                                placeholder={this.props.edit ? '' : this.props.note.body}
                                 style={{ width: '98%' }}
+                                value={this.state.body}
                             >
                             </textarea>
                         </form>
                     </div>
                 </div>
                 <div className="footer">
-                    <Button onClick={this.props.cancelNote} active={true} action={'cancel'} text={'Cancel'} />
-                    <Button onClick={this.addNote} active={!!this.state.title} text={this.props.edit ? 'Save' : 'Add'} />
+                    <Button 
+                        onClick={this.props.cancelNote} 
+                        active={true} 
+                        action={'cancel'} 
+                        text={'Cancel'} 
+                    />
+                    <Button 
+                        onClick={this.props.edit ? this.editNote : this.addNote} 
+                        active={!!this.state.title} 
+                        text={this.props.edit ? 'Save' : 'Add'} 
+                    />
                 </div>
             </div>
         )

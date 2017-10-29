@@ -3,10 +3,6 @@ import ReactDOM from 'react-dom';
 import Card from './card'
 
 export default class Body extends React.Component {
-    constructor(props) {
-        super(props)
-    }
-
     render() {
         return (
             <div className="body">

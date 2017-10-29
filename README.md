@@ -1,6 +1,6 @@
 # Notes App
 
-Simple note creation app using React.  
+Note creation app using React.  
 
 * Create new notes with the following attributes:
   * Title

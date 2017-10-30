@@ -15,7 +15,7 @@
     color: white;
     height: 60%;
     justify-content: center;
-    width: 150px;
+    width: 40%;
 }
 
 .button.cancel {
@@ -92,11 +92,12 @@
 }
 
 .dialog .footer {
-    height: 25%;
+    align-items: center;
     background-color: lightgray;
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
     display: flex;
+    height: 25%;
     justify-content: space-between;
     padding: 0px 15px;
 }
@@ -147,6 +148,10 @@
     justify-content: flex-end;
     padding-right: 15px;
     width: calc(100% - 15px);
+}
+
+.header .button {
+    width: 150px;
 }
 
 .modal-background {

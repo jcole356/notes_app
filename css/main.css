@@ -251,6 +251,11 @@
         margin: 0px;
     }
 
+    .body {
+        position: absolute;
+        top: 75px;
+    }
+
     .color-picker .color {
         border: solid 4px white;
         height: 40px;
@@ -268,7 +273,9 @@
     .header {
         justify-content: space-around;
         padding: 0px;
+        position: fixed;
         width: 100%;
+        z-index: 100;
     }
 
     .note {

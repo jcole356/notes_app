@@ -116,13 +116,13 @@
     background-color: white;
     font-size: 24px;
     height: 15%;
+    padding: 0px;
     width: 98%;
 }
 
 .formContainer input:focus {
     margin: 0px;
     outline: none;
-    padding: 0px;
 }
 
 .formContainer textarea, .formContainer textarea:focus {

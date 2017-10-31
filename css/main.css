@@ -25,7 +25,6 @@
     box-shadow: 0px 0px 12px #888888;
     margin: 20px;
     min-width: 250px;
-    padding-top: 5px;
     height: 200px;
     width: 20%;
 }
@@ -33,16 +32,22 @@
 .card .card-header {
     background-color: white;
     border-bottom: solid 1px black;
-    height: calc(25% - 10px);
+    height: 25%;
     padding-left: 10px;
-    padding-top: 10px;
+    position: relative; 
+    top: 2%;
 }
 
 .card .card-header .title {
     float: left;
+    font-size: 24px;
+    height: 50%;
+    position: relative;
+    top: 20%;
 }
 
 .card .card-header .buttons {
+    height: 100%;
     min-width: 50px;
 }
 
@@ -184,13 +189,19 @@
     border-bottom-left-radius: inherit;
     border-bottom-right-radius: inherit;
     font-size: 12px;
-    height: calc(75% - 10px);
+    height: 75%;
     padding-left: 10px;
-    padding-top: 10px;
-}
+    position: relative;
+    top: 2%;
+} 
 
-.note-body {
+.note-body textarea {
+    border: none;
+    font-size: 12px;
+    height: 100%;
+    outline: none;
     padding: 0;
+    resize: none;
 }
 
 .color-picker {

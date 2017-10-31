@@ -21580,12 +21580,7 @@ var Card = function (_React$Component) {
                     { className: 'note-body' },
                     _react2.default.createElement('textarea', {
                         readOnly: true,
-                        rows: 10
-                        // TODO: add to CSS
-                        , style: {
-                            border: 'none',
-                            outline: 'none',
-                            resize: 'none',
+                        style: {
                             width: '93%'
                         },
                         value: this.props.body

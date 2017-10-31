@@ -75,14 +75,12 @@ export default class Note extends React.Component {
             <div
                 className="note"
                 style={{
+                    backgroundColor,
                     display: this.props.visible ? 'block' : 'none',
                 }}
             >
                 <div
                     className="note-content"
-                    style={{
-                        backgroundColor: backgroundColor
-                    }}
                 >
                     <ColorPicker
                         onChange={this.handleColorChange} 

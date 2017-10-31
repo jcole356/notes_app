@@ -21850,16 +21850,14 @@ var Note = function (_React$Component) {
                 {
                     className: 'note',
                     style: {
+                        backgroundColor: backgroundColor,
                         display: this.props.visible ? 'block' : 'none'
                     }
                 },
                 _react2.default.createElement(
                     'div',
                     {
-                        className: 'note-content',
-                        style: {
-                            backgroundColor: backgroundColor
-                        }
+                        className: 'note-content'
                     },
                     _react2.default.createElement(_colorPicker2.default, {
                         onChange: this.handleColorChange,

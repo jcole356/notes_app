@@ -189,6 +189,10 @@
     padding-top: 10px;
 }
 
+.note-body {
+    padding: 0;
+}
+
 .color-picker {
     background-color: white;
     height: 8%;

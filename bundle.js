@@ -21412,7 +21412,11 @@ var Container = function (_React$Component) {
                 { className: 'container' },
                 this.state.openNoteModal || this.state.openDeleteModal ? _react2.default.createElement('div', { className: 'modal-background' }) : null,
                 _react2.default.createElement(_header2.default, { addNote: this.handleAddNoteClick }),
-                _react2.default.createElement(_body2.default, { notes: this.state.notes, editNote: this.handleEditNoteClick, deleteNote: this.handleDeleteNoteClick }),
+                _react2.default.createElement(_body2.default, {
+                    notes: this.state.notes,
+                    editNote: this.handleEditNoteClick,
+                    deleteNote: this.handleDeleteNoteClick
+                }),
                 _react2.default.createElement(_note2.default, {
                     cancelNote: this.cancelNote,
                     edit: this.state.edit,
@@ -21441,8 +21445,6 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -21457,46 +21459,23 @@ var _card2 = _interopRequireDefault(_card);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Body = function (_React$Component) {
-    _inherits(Body, _React$Component);
-
-    function Body() {
-        _classCallCheck(this, Body);
-
-        return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).apply(this, arguments));
-    }
-
-    _createClass(Body, [{
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
-
-            return _react2.default.createElement(
-                'div',
-                { className: 'body' },
-                this.props.notes.map(function (note, idx) {
-                    return _react2.default.createElement(_card2.default, {
-                        body: note.body,
-                        color: note.color,
-                        deleteNote: _this2.props.deleteNote,
-                        editNote: _this2.props.editNote,
-                        id: idx,
-                        key: idx,
-                        title: note.title
-                    });
-                })
-            );
-        }
-    }]);
-
-    return Body;
-}(_react2.default.Component);
+var Body = function Body(props) {
+    return _react2.default.createElement(
+        'div',
+        { className: 'body' },
+        props.notes.map(function (note, idx) {
+            return _react2.default.createElement(_card2.default, {
+                body: note.body,
+                color: note.color,
+                deleteNote: props.deleteNote,
+                editNote: props.editNote,
+                id: idx,
+                key: idx,
+                title: note.title
+            });
+        })
+    );
+};
 
 exports.default = Body;
 

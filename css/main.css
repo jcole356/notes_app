@@ -290,6 +290,11 @@
         width: 40px;
     }
 
+    .dialog {
+        left: 1%;
+        width: 98%;
+    }
+
     .formContainer input, .formContainer input:focus {
         font-size: 32px;
     }

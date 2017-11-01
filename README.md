@@ -1,6 +1,8 @@
 # Notes App
 
-Note creation app using React.  
+Responsive note creation app built with React.  
+
+See the [live demo](https://jcole356.github.io/notes_app/) here!
 
 * Create new notes with the following attributes:
   * Title

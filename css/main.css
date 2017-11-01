@@ -292,6 +292,7 @@
 
     .dialog {
         left: 1%;
+        position: fixed;
         width: 98%;
     }
 

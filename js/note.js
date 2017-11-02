@@ -37,6 +37,11 @@ export default class Note extends React.Component {
         this.resetDefaultState();
     }
     
+    cancelNote = () => {
+        this.resetDefaultState();
+        this.props.cancelNote();
+    }
+    
     editNote = () => {
         const title = this.state.title ? this.state.title : this.props.note.title
         const body = this.state.body ? this.state.body : this.props.note.body
@@ -109,7 +114,7 @@ export default class Note extends React.Component {
                 </div>
                 <div className="footer">
                     <Button 
-                        onClick={this.props.cancelNote} 
+                        onClick={this.cancelNote} 
                         active={true} 
                         action={'cancel'} 
                         text={'Cancel'} 

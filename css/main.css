@@ -343,9 +343,7 @@
     }
 
     .note-content {
-        height: 83%;
-        overflow: scroll;
-        position: fixed;
+        height: 100%;
     }
 
     .note .footer {

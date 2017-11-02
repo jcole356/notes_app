@@ -79,9 +79,7 @@ export default class Note extends React.Component {
                     display: this.props.visible ? 'block' : 'none',
                 }}
             >
-                <div
-                    className="note-content"
-                >
+                <div className="note-content">
                     <ColorPicker
                         onChange={this.handleColorChange} 
                         selected={this.state.color}

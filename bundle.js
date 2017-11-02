@@ -23489,9 +23489,7 @@ var Note = function (_React$Component) {
                 },
                 _react2.default.createElement(
                     'div',
-                    {
-                        className: 'note-content'
-                    },
+                    { className: 'note-content' },
                     _react2.default.createElement(_colorPicker2.default, {
                         onChange: this.handleColorChange,
                         selected: this.state.color

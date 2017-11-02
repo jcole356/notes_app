@@ -23425,6 +23425,11 @@ var Note = function (_React$Component) {
             _this.resetDefaultState();
         };
 
+        _this.cancelNote = function () {
+            _this.resetDefaultState();
+            _this.props.cancelNote();
+        };
+
         _this.editNote = function () {
             var title = _this.state.title ? _this.state.title : _this.props.note.title;
             var body = _this.state.body ? _this.state.body : _this.props.note.body;
@@ -23524,7 +23529,7 @@ var Note = function (_React$Component) {
                     'div',
                     { className: 'footer' },
                     _react2.default.createElement(_button2.default, {
-                        onClick: this.props.cancelNote,
+                        onClick: this.cancelNote,
                         active: true,
                         action: 'cancel',
                         text: 'Cancel'

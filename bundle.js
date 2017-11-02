@@ -21709,7 +21709,7 @@ var Header = function (_React$Component) {
                 null,
                 _react2.default.createElement(
                     _reactResponsive2.default,
-                    { query: '(max-device-width: 768px)' },
+                    { query: '(max-width: 768px)' },
                     _react2.default.createElement(
                         'div',
                         { className: 'header' },
@@ -21727,7 +21727,7 @@ var Header = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     _reactResponsive2.default,
-                    { query: '(min-device-width: 769px)' },
+                    { query: '(min-width: 769px)' },
                     _react2.default.createElement(
                         'div',
                         { className: 'header' },

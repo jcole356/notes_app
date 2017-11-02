@@ -13,7 +13,7 @@ export default class Header extends React.Component {
     render() {
         return (
             <div>
-                <MediaQuery query="(max-device-width: 768px)">
+                <MediaQuery query="(max-width: 768px)">
                     <div className="header">
                         <div className="header-title">
                             Notes
@@ -25,7 +25,7 @@ export default class Header extends React.Component {
                         />
                     </div>
                 </MediaQuery>
-                <MediaQuery query="(min-device-width: 769px)">
+                <MediaQuery query="(min-width: 769px)">
                     <div className="header">
                         <div className="header-title">
                             Notes

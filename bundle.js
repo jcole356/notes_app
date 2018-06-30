@@ -21411,7 +21411,7 @@ var Container = function (_React$Component) {
                 'div',
                 { className: 'container' },
                 this.state.openNoteModal || this.state.openDeleteModal ? _react2.default.createElement('div', { className: 'modal-background' }) : null,
-                _react2.default.createElement(_header2.default, { addNote: this.handleAddNoteClick }),
+                _react2.default.createElement(_header2.default, { addNote: this.handleAddNoteClick, className: 'header-container' }),
                 _react2.default.createElement(_body2.default, {
                     notes: this.state.notes,
                     editNote: this.handleEditNoteClick,

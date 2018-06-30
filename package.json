@@ -3,6 +3,10 @@
   "version": "1.0.1",
   "description": "",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jcole356/notes_app"
+  },
   "scripts": {
     "dev": "webpack"
   },

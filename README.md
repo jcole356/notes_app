@@ -4,6 +4,12 @@ Responsive note creation app built with React.
 
 See the [live demo](https://jcole356.github.io/notes_app/) here!
 
+To run locally:
+
+`npm install`
+`npm run dev`
+navigate to `index.html` on a web browswer
+
 * Create new notes with the following attributes:
   * Title
   * Color

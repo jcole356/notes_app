@@ -1,7 +1,8 @@
  /* Javascript */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Container from './container'
+import Container from './container';
+import '../css/main.css';
 
 class Page extends React.Component {
   render() {
@@ -12,3 +13,10 @@ class Page extends React.Component {
 }
 
 ReactDOM.render(<Page/>, document.getElementById('root'));
+
+// if (module.hot) {
+//   module.hot.accept('./container.js', function() {
+//     console.log('Accepting the updated printMe module!');
+//     printMe();
+//   })
+// }

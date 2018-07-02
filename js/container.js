@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import Body from './body'
-import Dialog from './dialog'
-import Header from './header'
-import Note from './note'
+import Body from './body';
+import Dialog from './dialog';
+import Header from './header';
+import Note from './note';
 
 export default class Container extends React.Component {
     constructor(props) {

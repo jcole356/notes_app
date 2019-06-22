@@ -1,19 +1,27 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Card from './card'
 
-const Body = (props) => (
+const Body = ({
+    deleteNote,
+    editNote,
+    notes,
+}) => (
     <div className="body">
-        {props.notes.map((note, idx) => {
+        {notes.map((note, idx) => {
+            const {
+                body,
+                color,
+                title,
+            } = note;
             return (
                 <Card 
-                    body={note.body}
-                    color={note.color} 
-                    deleteNote={props.deleteNote} 
-                    editNote={props.editNote}
-                    id={idx} 
-                    key={idx} 
-                    title={note.title} 
+                    body={body}
+                    color={color}
+                    deleteNote={deleteNote}
+                    editNote={editNote}
+                    id={idx}
+                    key={title}
+                    title={title}
                 />
             )
         })}

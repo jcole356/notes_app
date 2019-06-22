@@ -5,7 +5,7 @@ import MediaQuery from "react-responsive";
 import Button from "./Button";
 
 export default function Header({ addNote }) {
-  // TODO: add a media query to format the button
+  // TODO: use media query to change button text
   // TODO: stop adding the undefined class to some instances of the button
   return (
     <div>

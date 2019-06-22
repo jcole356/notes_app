@@ -22,11 +22,15 @@ const Body = ({ deleteNote, editNote, notes }) => (
   </div>
 );
 
+const noteType = PropTypes.shape({
+  optionalProperty: PropTypes.string,
+  requiredProperty: PropTypes.number.isRequired
+});
+
 Body.propTypes = {
   deleteNote: PropTypes.func.isRequired,
   editNote: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  notes: PropTypes.any.isRequired
+  notes: PropTypes.arrayOf(noteType).isRequired
 };
 
 export default Body;

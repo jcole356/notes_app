@@ -24,7 +24,6 @@ export default class Container extends React.Component {
     };
   }
 
-  // TODO: this is gross
   addNote = (title, body, color) => {
     const { notes } = this.state;
     notes.unshift({ title, body, color });
@@ -74,7 +73,6 @@ export default class Container extends React.Component {
     });
   };
 
-  // TODO: rename to openModal
   handleAddNoteClick = () => {
     this.setState({
       openNoteModal: true

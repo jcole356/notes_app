@@ -3,20 +3,19 @@ import PropTypes from "prop-types";
 
 import Card from "./Card";
 
-// TODO: title isn't gaurunteed to be unique
 export default function Body({ deleteNote, editNote, notes }) {
   return (
     <div className="body">
-      {notes.map((note, idx) => {
-        const { body, color, title } = note;
+      {notes.map(note => {
+        const { body, color, id, title } = note;
         return (
           <Card
             body={body}
             color={color}
             deleteNote={deleteNote}
             editNote={editNote}
-            id={idx}
-            key={title}
+            id={id}
+            key={id}
             title={title}
           />
         );
@@ -28,6 +27,7 @@ export default function Body({ deleteNote, editNote, notes }) {
 export const noteType = PropTypes.shape({
   body: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired
 });
 

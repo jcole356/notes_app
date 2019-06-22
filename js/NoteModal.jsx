@@ -1,3 +1,5 @@
+// TODO: disable this rule globally
+/* eslint-disable react/no-did-update-set-state */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -6,27 +8,31 @@ import ColorPicker from "./ColorPicker";
 
 import { noteType } from "./Body";
 
+const DEFAULT_NOTE_COLOR = "red";
+const DEFAULT_NOTE_STATE = {
+  body: "",
+  color: DEFAULT_NOTE_COLOR,
+  title: ""
+};
+
 export default class NoteModal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      body: "",
-      title: "",
-      color: "red"
-    };
+    this.state = DEFAULT_NOTE_STATE;
   }
 
-  // TODO: replace with componentDidUpdate
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.edit) {
+  componentDidUpdate(prevProps) {
+    const { edit, note } = this.props;
+    if (!prevProps.edit && edit) {
       this.setState({
-        body: nextProps.note.body,
-        title: nextProps.note.title,
-        color: nextProps.note.color
+        body: note.body,
+        color: note.color,
+        title: note.title
       });
-    } else {
+    }
+    if (prevProps.edit && !edit) {
       this.setState({
-        color: nextProps.note.color
+        color: DEFAULT_NOTE_COLOR
       });
     }
   }
@@ -69,11 +75,7 @@ export default class NoteModal extends React.Component {
   };
 
   resetDefaultState = () => {
-    this.setState({
-      title: "",
-      body: "",
-      color: "red"
-    });
+    this.setState(DEFAULT_NOTE_STATE);
   };
 
   render() {

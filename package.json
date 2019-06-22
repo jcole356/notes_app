@@ -16,7 +16,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-responsive": "^3.0.0"
+    "react-responsive": "^3.0.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",

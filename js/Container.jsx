@@ -1,4 +1,5 @@
 import React from "react";
+import uuidv1 from "uuid/v1";
 
 import Body from "./Body";
 import Dialog from "./Dialog";
@@ -8,6 +9,7 @@ import NoteModal from "./NoteModal";
 import mockNotes from "./mocks/notes";
 
 const DEFAULT_NOTE = {
+  id: uuidv1(),
   body: "Just start typing here",
   color: "red",
   title: "Untitled"
@@ -17,20 +19,26 @@ export default class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      note: null,
+      edit: false,
       notes: mockNotes,
       openDeleteModal: false,
-      openNoteModal: false
+      openNoteModal: false,
+      selectedNoteId: null
     };
   }
 
   addNote = (title, body, color) => {
     const { notes } = this.state;
-    notes.unshift({ title, body, color });
+    notes.unshift({
+      body,
+      color,
+      id: uuidv1(),
+      title
+    });
     this.setState({
-      note: null,
       notes,
-      openNoteModal: false
+      openNoteModal: false,
+      selectedNoteId: null
     });
   };
 
@@ -42,32 +50,42 @@ export default class Container extends React.Component {
 
   cancelNote = () => {
     this.setState({
-      note: null,
+      edit: false,
+      selectedNoteId: null,
       openNoteModal: false
     });
   };
 
   editNote = (title, body, color) => {
-    const { note, notes } = this.state;
+    const { selectedNoteId, notes } = this.state;
     this.handleAddNoteClick();
-    notes[note] = {
+    const findNote = notes.find(note => {
+      return note.id === selectedNoteId;
+    });
+    const idx = notes.indexOf(findNote);
+    notes[idx] = {
       title,
+      id: selectedNoteId,
       body,
       color
     };
     this.setState({
       edit: false,
-      note: null,
+      selectedNoteId: null,
       notes,
       openNoteModal: false
     });
   };
 
   deleteNote = () => {
-    const { note, notes } = this.state;
-    notes.splice(note, 1);
+    const { selectedNoteId, notes } = this.state;
+    const findNote = notes.find(note => {
+      return note.id === selectedNoteId;
+    });
+    const idx = notes.indexOf(findNote);
+    notes.splice(idx, 1);
     this.setState({
-      note: null,
+      selectedNoteId: null,
       notes,
       openDeleteModal: false
     });
@@ -75,6 +93,7 @@ export default class Container extends React.Component {
 
   handleAddNoteClick = () => {
     this.setState({
+      selectedNoteId: null,
       openNoteModal: true
     });
   };
@@ -82,20 +101,26 @@ export default class Container extends React.Component {
   handleDeleteNoteClick = id => {
     this.setState({
       openDeleteModal: true,
-      note: id
+      selectedNoteId: id
     });
   };
 
   handleEditNoteClick = id => {
     this.setState({
       edit: true,
-      note: id,
+      selectedNoteId: id,
       openNoteModal: true
     });
   };
 
   render() {
-    const { edit, note, notes, openDeleteModal, openNoteModal } = this.state;
+    const {
+      edit,
+      notes,
+      openDeleteModal,
+      openNoteModal,
+      selectedNoteId
+    } = this.state;
     return (
       <div className="container">
         {openNoteModal || openDeleteModal ? (
@@ -113,7 +138,13 @@ export default class Container extends React.Component {
         <NoteModal
           cancelNote={this.cancelNote}
           edit={edit}
-          note={note ? notes.slice(note, note + 1)[0] : DEFAULT_NOTE}
+          note={
+            selectedNoteId
+              ? notes.find(note => {
+                  return note.id === selectedNoteId;
+                })
+              : DEFAULT_NOTE
+          }
           submit={edit ? this.editNote : this.addNote}
           visible={openNoteModal}
         />

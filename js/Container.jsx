@@ -17,7 +17,7 @@ export default class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      note: "",
+      note: null,
       notes: mockNotes,
       openDeleteModal: false,
       openNoteModal: false
@@ -29,7 +29,7 @@ export default class Container extends React.Component {
     const { notes } = this.state;
     notes.unshift({ title, body, color });
     this.setState({
-      note: "",
+      note: null,
       notes,
       openNoteModal: false
     });
@@ -43,7 +43,7 @@ export default class Container extends React.Component {
 
   cancelNote = () => {
     this.setState({
-      note: "",
+      note: null,
       openNoteModal: false
     });
   };
@@ -58,7 +58,7 @@ export default class Container extends React.Component {
     };
     this.setState({
       edit: false,
-      note: "",
+      note: null,
       notes,
       openNoteModal: false
     });
@@ -68,7 +68,7 @@ export default class Container extends React.Component {
     const { note, notes } = this.state;
     notes.splice(note, 1);
     this.setState({
-      note: "",
+      note: null,
       notes,
       openDeleteModal: false
     });
@@ -115,7 +115,7 @@ export default class Container extends React.Component {
         <Note
           cancelNote={this.cancelNote}
           edit={edit}
-          note={note !== "" ? notes.slice(note, note + 1)[0] : DEFAULT_NOTE}
+          note={note ? notes.slice(note, note + 1)[0] : DEFAULT_NOTE}
           submit={edit ? this.editNote : this.addNote}
           visible={openNoteModal}
         />

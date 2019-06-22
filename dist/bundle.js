@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "98bc83b58051e8a29bcb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9e7f7de31eadce560e0a"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -29666,7 +29666,7 @@ exports.default = [{
   title: "Monday"
 }, {
   id: "3",
-  body: "Dinner\nslep",
+  body: "Dinner\nsleep",
   color: "blue",
   title: "Friday"
 }, {

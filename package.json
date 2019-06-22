@@ -13,17 +13,27 @@
   "author": "jcole",
   "license": "ISC",
   "dependencies": {
+    "prop-types": "^15.7.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-responsive": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^10.0.2",
     "babel-loader": "^7.1.2",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.11",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "prettier": "1.18.2",
     "style-loader": "^0.21.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"

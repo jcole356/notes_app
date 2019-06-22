@@ -3,7 +3,7 @@ import React from "react";
 import Body from "./Body";
 import Dialog from "./Dialog";
 import Header from "./Header";
-import Note from "./Note";
+import NoteModal from "./NoteModal";
 
 import mockNotes from "./mocks/notes";
 
@@ -112,7 +112,7 @@ export default class Container extends React.Component {
           editNote={this.handleEditNoteClick}
           deleteNote={this.handleDeleteNoteClick}
         />
-        <Note
+        <NoteModal
           cancelNote={this.cancelNote}
           edit={edit}
           note={note ? notes.slice(note, note + 1)[0] : DEFAULT_NOTE}

@@ -1,11 +1,12 @@
-/* eslint-disable react/forbid-prop-types */
 import React from "react";
 import PropTypes from "prop-types";
 
 import Button from "./Button";
 import ColorPicker from "./ColorPicker";
 
-export default class Note extends React.Component {
+import { noteType } from "./Body";
+
+export default class NoteModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -129,14 +130,14 @@ export default class Note extends React.Component {
   }
 }
 
-Note.defaultProps = {
+NoteModal.defaultProps = {
   edit: false
 };
 
-Note.propTypes = {
+NoteModal.propTypes = {
   cancelNote: PropTypes.func.isRequired,
   edit: PropTypes.bool,
-  note: PropTypes.any.isRequired,
+  note: noteType.isRequired,
   submit: PropTypes.func.isRequired,
   visible: PropTypes.bool.isRequired
 };

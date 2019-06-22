@@ -22,9 +22,10 @@ const Body = ({ deleteNote, editNote, notes }) => (
   </div>
 );
 
-const noteType = PropTypes.shape({
-  optionalProperty: PropTypes.string,
-  requiredProperty: PropTypes.number.isRequired
+export const noteType = PropTypes.shape({
+  body: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 });
 
 Body.propTypes = {

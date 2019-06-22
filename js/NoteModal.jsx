@@ -33,7 +33,9 @@ export default class NoteModal extends React.Component {
     }
     if (prevProps.edit && !edit) {
       this.setState({
-        color: DEFAULT_NOTE_COLOR
+        body: "",
+        color: DEFAULT_NOTE_COLOR,
+        title: ""
       });
     }
   }
@@ -47,7 +49,6 @@ export default class NoteModal extends React.Component {
 
   cancelNote = () => {
     const { cancelNote } = this.props;
-    this.resetDefaultState();
     cancelNote();
   };
 
@@ -60,7 +61,6 @@ export default class NoteModal extends React.Component {
     const titleResult = title || noteTitle;
     const bodyResult = body || noteBody;
     submit(titleResult, bodyResult, color);
-    this.resetDefaultState();
   };
 
   handleChange = event => {

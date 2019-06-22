@@ -45,6 +45,6 @@ Card.propTypes = {
   color: PropTypes.string.isRequired,
   deleteNote: PropTypes.func.isRequired,
   editNote: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired
 };

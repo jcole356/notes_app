@@ -5,35 +5,22 @@ import Dialog from "./Dialog";
 import Header from "./Header";
 import Note from "./Note";
 
+import mockNotes from "./mocks/notes";
+
+const DEFAULT_NOTE = {
+  body: "Just start typing here",
+  color: "red",
+  title: "Untitled"
+};
+
 export default class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       note: "",
-      notes: [
-        {
-          title: "Sunday",
-          body: `watch football\nexercise\nlaundry`,
-          color: "red"
-        },
-        {
-          title: "Monday",
-          body: "go to work",
-          color: "green"
-        },
-        {
-          title: "Friday",
-          body: "Dinner\nsleep",
-          color: "blue"
-        },
-        {
-          title: "Saturday",
-          body: "Farmers Market\nWatch Stranger Things",
-          color: "yellow"
-        }
-      ],
-      openNoteModal: false,
-      openDeleteModal: false
+      notes: mockNotes,
+      openDeleteModal: false,
+      openNoteModal: false
     };
   }
 
@@ -94,17 +81,17 @@ export default class Container extends React.Component {
     });
   };
 
-  handleDeleteNoteClick = key => {
+  handleDeleteNoteClick = id => {
     this.setState({
       openDeleteModal: true,
-      note: key
+      note: id
     });
   };
 
-  handleEditNoteClick = key => {
+  handleEditNoteClick = id => {
     this.setState({
       edit: true,
-      note: key,
+      note: id,
       openNoteModal: true
     });
   };
@@ -128,15 +115,7 @@ export default class Container extends React.Component {
         <Note
           cancelNote={this.cancelNote}
           edit={edit}
-          note={
-            note !== ""
-              ? notes.slice(note, note + 1)[0]
-              : {
-                  title: "Untitled",
-                  body: "Just start typing here",
-                  color: "red"
-                }
-          }
+          note={note !== "" ? notes.slice(note, note + 1)[0] : DEFAULT_NOTE}
           submit={edit ? this.editNote : this.addNote}
           visible={openNoteModal}
         />

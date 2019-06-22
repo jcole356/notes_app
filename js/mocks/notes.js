@@ -13,7 +13,7 @@ export default [
   },
   {
     id: "3",
-    body: "Dinner\nslep",
+    body: "Dinner\nsleep",
     color: "blue",
     title: "Friday"
   },

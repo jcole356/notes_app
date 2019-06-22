@@ -1,4 +1,5 @@
 // TODO: disable this rule globally
+// TODO: maybe a condidate for adding hooks?
 /* eslint-disable react/no-did-update-set-state */
 import React from "react";
 import PropTypes from "prop-types";

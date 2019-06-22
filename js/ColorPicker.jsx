@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 const DEFAULT_NOTE_COLORS = ["red", "green", "yellow", "blue"];
 
+// TODO: color picker squares should be components
 export default class ColorPicker extends React.Component {
   handleChange = event => {
     const { onChange } = this.props;

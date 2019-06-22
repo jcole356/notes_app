@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import Card from "./Card";
 
+// TODO: title isn't gaurunteed to be unique
 export default function Body({ deleteNote, editNote, notes }) {
   return (
     <div className="body">

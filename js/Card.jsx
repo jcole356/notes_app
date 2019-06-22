@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import Button from "./Button";
 
-function Card({ body, color, deleteNote, editNote, id, title }) {
+export default function Card({ body, color, deleteNote, editNote, id, title }) {
   return (
     <div className="card" style={{ backgroundColor: color }}>
       <div className="card-header">
@@ -48,5 +48,3 @@ Card.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired
 };
-
-export default Card;

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Button({ action, active, icon, onClick, text }) {
+export default function Button({ action, active, icon, onClick, text }) {
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
@@ -27,5 +27,3 @@ Button.propTypes = {
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired
 };
-
-export default Button;

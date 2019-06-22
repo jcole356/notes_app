@@ -1,7 +1,7 @@
 .body {
     display: flex;
     flex-flow: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .button {
@@ -26,7 +26,6 @@
     margin: 10px;
     min-width: 225px;
     height: 200px;
-    width: 20%;
 }
 
 .card .card-header {
@@ -276,7 +275,6 @@
         top: 75px;
     }
     .card {
-        flex-grow: 0;
         width: 90%;
     }
 

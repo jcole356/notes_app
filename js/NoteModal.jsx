@@ -52,7 +52,6 @@ export default class NoteModal extends React.Component {
     cancelNote();
   };
 
-  // TODO: this is mildly broken
   editNote = () => {
     const { body, color, title } = this.state;
     const {

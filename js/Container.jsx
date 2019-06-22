@@ -20,10 +20,10 @@ export default class Container extends React.Component {
     super(props);
     this.state = {
       edit: false,
-      selectedNoteId: null,
       notes: mockNotes,
       openDeleteModal: false,
-      openNoteModal: false
+      openNoteModal: false,
+      selectedNoteId: null
     };
   }
 

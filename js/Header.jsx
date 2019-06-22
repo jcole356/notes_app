@@ -9,13 +9,13 @@ export default function Header({ addNote }) {
   // TODO: stop adding the undefined class to some instances of the button
   return (
     <div>
-      <MediaQuery query="(max-width: 768px)">
+      <MediaQuery query="(max-width: 767px)">
         <div className="header">
           <div className="header-title">Notes</div>
           <Button active onClick={addNote} text="+" />
         </div>
       </MediaQuery>
-      <MediaQuery query="(min-width: 769px)">
+      <MediaQuery query="(min-width: 768px)">
         <div className="header">
           <div className="header-title">Notes</div>
           <Button active onClick={addNote} text="+ Add Note" />

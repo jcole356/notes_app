@@ -1,15 +1,15 @@
 .body {
-    display: flex;
-    flex-flow: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     justify-content: space-between;
 }
 
 .button {
     align-items: center;  
-    display: flex;
     background-color: lightseagreen;
     border-radius: 3px;
     color: white;
+    display: flex;
     height: 60%;
     justify-content: center;
     width: 40%;
@@ -22,9 +22,7 @@
 .card {
     border-radius: 4px;
     box-shadow: 4px 8px 12px #888888;
-    flex-grow: 1;
     margin: 10px;
-    min-width: 225px;
     height: 200px;
 }
 
@@ -258,24 +256,22 @@
 }
 
 /* tablets and lower resolution monitors */
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-    .card {
-        width: 40%;
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .body {
+        grid-template-columns: 1fr 1fr 1fr;
     }
 }
 
 /* Mobile Styling */
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     body {
         margin: 0px;
     }
 
     .body {
+        grid-template-columns: 1fr;
         position: relative;
         top: 75px;
-    }
-    .card {
-        width: 90%;
     }
 
     .card .card-header .title {

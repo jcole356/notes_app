@@ -2,7 +2,7 @@
 
 Responsive note creation app built with React.  
 
-See the [live demo](https://jcole356.github.io/notes_app/) here!
+See the [live demo](https://jcole356.github.io/notes_app/dist/) here!
 
 To run locally:
 

@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6ada6b1f5c4a40fb781d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "98bc83b58051e8a29bcb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -947,11 +947,11 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(26)(ReactIs.isElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(29)(ReactIs.isElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(27)();
+  module.exports = __webpack_require__(30)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -1243,7 +1243,7 @@ module.exports = ReactPropTypesSecret;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(36)(false);
+exports = module.exports = __webpack_require__(39)(false);
 // imports
 
 
@@ -1316,13 +1316,12 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _Card = __webpack_require__(28);
+var _Card = __webpack_require__(31);
 
 var _Card2 = _interopRequireDefault(_Card);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// TODO: title isn't gaurunteed to be unique
 function Body(_ref) {
   var deleteNote = _ref.deleteNote,
       editNote = _ref.editNote,
@@ -1331,9 +1330,10 @@ function Body(_ref) {
   return _react2.default.createElement(
     "div",
     { className: "body" },
-    notes.map(function (note, idx) {
+    notes.map(function (note) {
       var body = note.body,
           color = note.color,
+          id = note.id,
           title = note.title;
 
       return _react2.default.createElement(_Card2.default, {
@@ -1341,8 +1341,8 @@ function Body(_ref) {
         color: color,
         deleteNote: deleteNote,
         editNote: editNote,
-        id: idx,
-        key: title,
+        id: id,
+        key: id,
         title: title
       });
     })
@@ -1352,6 +1352,7 @@ function Body(_ref) {
 var noteType = exports.noteType = _propTypes2.default.shape({
   body: _propTypes2.default.string.isRequired,
   color: _propTypes2.default.string.isRequired,
+  id: _propTypes2.default.string.isRequired,
   title: _propTypes2.default.string.isRequired
 });
 
@@ -1369,9 +1370,9 @@ Body.propTypes = {
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(24);
+  module.exports = __webpack_require__(27);
 } else {
-  module.exports = __webpack_require__(25);
+  module.exports = __webpack_require__(28);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
@@ -1395,7 +1396,7 @@ var _Container = __webpack_require__(23);
 
 var _Container2 = _interopRequireDefault(_Container);
 
-__webpack_require__(35);
+__webpack_require__(38);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26171,23 +26172,27 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _v = __webpack_require__(24);
+
+var _v2 = _interopRequireDefault(_v);
+
 var _Body = __webpack_require__(10);
 
 var _Body2 = _interopRequireDefault(_Body);
 
-var _Dialog = __webpack_require__(29);
+var _Dialog = __webpack_require__(32);
 
 var _Dialog2 = _interopRequireDefault(_Dialog);
 
-var _Header = __webpack_require__(30);
+var _Header = __webpack_require__(33);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _NoteModal = __webpack_require__(32);
+var _NoteModal = __webpack_require__(35);
 
 var _NoteModal2 = _interopRequireDefault(_NoteModal);
 
-var _notes = __webpack_require__(34);
+var _notes = __webpack_require__(37);
 
 var _notes2 = _interopRequireDefault(_notes);
 
@@ -26200,6 +26205,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var DEFAULT_NOTE = {
+  id: (0, _v2.default)(),
   body: "Just start typing here",
   color: "red",
   title: "Untitled"
@@ -26216,11 +26222,16 @@ var Container = function (_React$Component) {
     _this.addNote = function (title, body, color) {
       var notes = _this.state.notes;
 
-      notes.unshift({ title: title, body: body, color: color });
+      notes.unshift({
+        body: body,
+        color: color,
+        id: (0, _v2.default)(),
+        title: title
+      });
       _this.setState({
-        note: null,
         notes: notes,
-        openNoteModal: false
+        openNoteModal: false,
+        selectedNoteId: null
       });
     };
 
@@ -26232,25 +26243,31 @@ var Container = function (_React$Component) {
 
     _this.cancelNote = function () {
       _this.setState({
-        note: null,
+        edit: false,
+        selectedNoteId: null,
         openNoteModal: false
       });
     };
 
     _this.editNote = function (title, body, color) {
       var _this$state = _this.state,
-          note = _this$state.note,
+          selectedNoteId = _this$state.selectedNoteId,
           notes = _this$state.notes;
 
       _this.handleAddNoteClick();
-      notes[note] = {
+      var findNote = notes.find(function (note) {
+        return note.id === selectedNoteId;
+      });
+      var idx = notes.indexOf(findNote);
+      notes[idx] = {
         title: title,
+        id: selectedNoteId,
         body: body,
         color: color
       };
       _this.setState({
         edit: false,
-        note: null,
+        selectedNoteId: null,
         notes: notes,
         openNoteModal: false
       });
@@ -26258,12 +26275,16 @@ var Container = function (_React$Component) {
 
     _this.deleteNote = function () {
       var _this$state2 = _this.state,
-          note = _this$state2.note,
+          selectedNoteId = _this$state2.selectedNoteId,
           notes = _this$state2.notes;
 
-      notes.splice(note, 1);
+      var findNote = notes.find(function (note) {
+        return note.id === selectedNoteId;
+      });
+      var idx = notes.indexOf(findNote);
+      notes.splice(idx, 1);
       _this.setState({
-        note: null,
+        selectedNoteId: null,
         notes: notes,
         openDeleteModal: false
       });
@@ -26271,6 +26292,7 @@ var Container = function (_React$Component) {
 
     _this.handleAddNoteClick = function () {
       _this.setState({
+        selectedNoteId: null,
         openNoteModal: true
       });
     };
@@ -26278,23 +26300,24 @@ var Container = function (_React$Component) {
     _this.handleDeleteNoteClick = function (id) {
       _this.setState({
         openDeleteModal: true,
-        note: id
+        selectedNoteId: id
       });
     };
 
     _this.handleEditNoteClick = function (id) {
       _this.setState({
         edit: true,
-        note: id,
+        selectedNoteId: id,
         openNoteModal: true
       });
     };
 
     _this.state = {
-      note: null,
+      edit: false,
       notes: _notes2.default,
       openDeleteModal: false,
-      openNoteModal: false
+      openNoteModal: false,
+      selectedNoteId: null
     };
     return _this;
   }
@@ -26304,10 +26327,10 @@ var Container = function (_React$Component) {
     value: function render() {
       var _state = this.state,
           edit = _state.edit,
-          note = _state.note,
           notes = _state.notes,
           openDeleteModal = _state.openDeleteModal,
-          openNoteModal = _state.openNoteModal;
+          openNoteModal = _state.openNoteModal,
+          selectedNoteId = _state.selectedNoteId;
 
       return _react2.default.createElement(
         "div",
@@ -26325,7 +26348,9 @@ var Container = function (_React$Component) {
         _react2.default.createElement(_NoteModal2.default, {
           cancelNote: this.cancelNote,
           edit: edit,
-          note: note ? notes.slice(note, note + 1)[0] : DEFAULT_NOTE,
+          note: selectedNoteId ? notes.find(function (note) {
+            return note.id === selectedNoteId;
+          }) : DEFAULT_NOTE,
           submit: edit ? this.editNote : this.addNote,
           visible: openNoteModal
         }),
@@ -26347,6 +26372,191 @@ exports.default = Container;
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var rng = __webpack_require__(25);
+var bytesToUuid = __webpack_require__(26);
+
+// **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+var _nodeId;
+var _clockseq;
+
+// Previous uuid creation time
+var _lastMSecs = 0;
+var _lastNSecs = 0;
+
+// See https://github.com/broofa/node-uuid for API details
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || [];
+
+  options = options || {};
+  var node = options.node || _nodeId;
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq;
+
+  // node and clockseq need to be initialized to random values if they're not
+  // specified.  We do this lazily to minimize issues related to insufficient
+  // system entropy.  See #189
+  if (node == null || clockseq == null) {
+    var seedBytes = rng();
+    if (node == null) {
+      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+      node = _nodeId = [
+        seedBytes[0] | 0x01,
+        seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]
+      ];
+    }
+    if (clockseq == null) {
+      // Per 4.2.2, randomize (14 bit) clockseq
+      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+    }
+  }
+
+  // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+
+  // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
+
+  // Time since last uuid creation (in msecs)
+  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+
+  // Per 4.2.1.2, Bump clockseq on clock regression
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  }
+
+  // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  }
+
+  // Per 4.2.1.2 Throw error if too many uuids are requested
+  if (nsecs >= 10000) {
+    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq;
+
+  // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+  msecs += 12219292800000;
+
+  // `time_low`
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff;
+
+  // `time_mid`
+  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff;
+
+  // `time_high_and_version`
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+  b[i++] = tmh >>> 16 & 0xff;
+
+  // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+  b[i++] = clockseq >>> 8 | 0x80;
+
+  // `clock_seq_low`
+  b[i++] = clockseq & 0xff;
+
+  // `node`
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf ? buf : bytesToUuid(b);
+}
+
+module.exports = v1;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports) {
+
+// Unique ID creation requires a high quality random # generator.  In the
+// browser this is a little complicated due to unknown quality of Math.random()
+// and inconsistent support for the `crypto` API.  We do the best we can via
+// feature-detection
+
+// getRandomValues needs to be invoked in a context where "this" is a Crypto
+// implementation. Also, find the complete implementation of crypto on IE11.
+var getRandomValues = (typeof(crypto) != 'undefined' && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)) ||
+                      (typeof(msCrypto) != 'undefined' && typeof window.msCrypto.getRandomValues == 'function' && msCrypto.getRandomValues.bind(msCrypto));
+
+if (getRandomValues) {
+  // WHATWG crypto RNG - http://wiki.whatwg.org/wiki/Crypto
+  var rnds8 = new Uint8Array(16); // eslint-disable-line no-undef
+
+  module.exports = function whatwgRNG() {
+    getRandomValues(rnds8);
+    return rnds8;
+  };
+} else {
+  // Math.random()-based (RNG)
+  //
+  // If all else fails, use Math.random().  It's fast, but is of unspecified
+  // quality.
+  var rnds = new Array(16);
+
+  module.exports = function mathRNG() {
+    for (var i = 0, r; i < 16; i++) {
+      if ((i & 0x03) === 0) r = Math.random() * 0x100000000;
+      rnds[i] = r >>> ((i & 0x03) << 3) & 0xff;
+    }
+
+    return rnds;
+  };
+}
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports) {
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+var byteToHex = [];
+for (var i = 0; i < 256; ++i) {
+  byteToHex[i] = (i + 0x100).toString(16).substr(1);
+}
+
+function bytesToUuid(buf, offset) {
+  var i = offset || 0;
+  var bth = byteToHex;
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
+}
+
+module.exports = bytesToUuid;
+
+
+/***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 /** @license React v16.8.6
  * react-is.production.min.js
@@ -26366,7 +26576,7 @@ exports.isSuspense=function(a){return t(a)===p};
 
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26601,7 +26811,7 @@ exports.isSuspense = isSuspense;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27200,7 +27410,7 @@ module.exports = function(isValidElement, throwOnDirectAccess) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(0)))
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27271,7 +27481,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27355,12 +27565,12 @@ Card.propTypes = {
   color: _propTypes2.default.string.isRequired,
   deleteNote: _propTypes2.default.func.isRequired,
   editNote: _propTypes2.default.func.isRequired,
-  id: _propTypes2.default.number.isRequired,
+  id: _propTypes2.default.string.isRequired,
   title: _propTypes2.default.string.isRequired
 };
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27423,7 +27633,7 @@ Dialog.propTypes = {
 };
 
 /***/ }),
-/* 30 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27442,7 +27652,7 @@ var _propTypes = __webpack_require__(2);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactResponsive = __webpack_require__(31);
+var _reactResponsive = __webpack_require__(34);
 
 var _reactResponsive2 = _interopRequireDefault(_reactResponsive);
 
@@ -27496,7 +27706,7 @@ Header.propTypes = {
 };
 
 /***/ }),
-/* 31 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -29116,7 +29326,7 @@ module.exports = exports['default'];
 //# sourceMappingURL=react-responsive.js.map
 
 /***/ }),
-/* 32 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29140,7 +29350,7 @@ var _Button = __webpack_require__(4);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _ColorPicker = __webpack_require__(33);
+var _ColorPicker = __webpack_require__(36);
 
 var _ColorPicker2 = _interopRequireDefault(_ColorPicker);
 
@@ -29188,7 +29398,6 @@ var NoteModal = function (_React$Component) {
     _this.cancelNote = function () {
       var cancelNote = _this.props.cancelNote;
 
-      _this.resetDefaultState();
       cancelNote();
     };
 
@@ -29206,7 +29415,6 @@ var NoteModal = function (_React$Component) {
       var titleResult = title || noteTitle;
       var bodyResult = body || noteBody;
       submit(titleResult, bodyResult, color);
-      _this.resetDefaultState();
     };
 
     _this.handleChange = function (event) {
@@ -29243,7 +29451,9 @@ var NoteModal = function (_React$Component) {
       }
       if (prevProps.edit && !edit) {
         this.setState({
-          color: DEFAULT_NOTE_COLOR
+          body: "",
+          color: DEFAULT_NOTE_COLOR,
+          title: ""
         });
       }
     }
@@ -29337,7 +29547,7 @@ NoteModal.propTypes = {
 };
 
 /***/ }),
-/* 33 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29435,7 +29645,7 @@ ColorPicker.propTypes = {
 };
 
 /***/ }),
-/* 34 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29445,25 +29655,29 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = [{
+  id: "1",
   body: "watch football\nexercise\nlaundry",
   color: "red",
   title: "Sunday"
 }, {
+  id: "2",
   body: "go to work",
   color: "green",
   title: "Monday"
 }, {
+  id: "3",
   body: "Dinner\nslep",
   color: "blue",
   title: "Friday"
 }, {
+  id: "4",
   body: "Farmers Market\nWatch Stranger Things",
   color: "yellow",
   title: "Saturday"
 }];
 
 /***/ }),
-/* 35 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -29481,7 +29695,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(37)(content, options);
+var update = __webpack_require__(40)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -29513,7 +29727,7 @@ if(true) {
 }
 
 /***/ }),
-/* 36 */
+/* 39 */
 /***/ (function(module, exports) {
 
 /*
@@ -29595,7 +29809,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 37 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -29661,7 +29875,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(38);
+var	fixUrls = __webpack_require__(41);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -29981,7 +30195,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 38 */
+/* 41 */
 /***/ (function(module, exports) {
 
 

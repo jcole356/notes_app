@@ -10,3 +10,7 @@ function Page() {
 
 // eslint-disable-next-line no-undef
 ReactDOM.render(<Page />, document.getElementById("root"));
+
+if (module.hot) {
+  module.hot.accept();
+}

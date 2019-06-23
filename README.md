@@ -6,9 +6,8 @@ See the [live demo](https://jcole356.github.io/notes_app/dist/) here!
 
 To run locally:
 
-1. `npm install`
-2. `npm run dev`
-3. navigate to `index.html` on a web browswer
+1. `yarn`
+2. `yarn start`
 
 * Create new notes with the following attributes:
   * Title

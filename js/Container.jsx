@@ -18,13 +18,43 @@ const DEFAULT_NOTE = {
 export default class Container extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       edit: false,
-      notes: mockNotes,
+      notes: [],
       openDeleteModal: false,
       openNoteModal: false,
       selectedNoteId: null
     };
+  }
+
+  // TODO: create a new API layer
+  componentDidMount() {
+    // eslint-disable-next-line no-undef
+    const myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+
+    const myInit = {
+      method: "GET",
+      headers: myHeaders,
+      cache: "default"
+    };
+
+    // eslint-disable-next-line no-undef
+    const myRequest = new Request("http://localhost:3000/api/users/1");
+
+    // eslint-disable-next-line no-undef
+    fetch(myRequest, myInit)
+      .then(response =>
+        response.json().then(json => {
+          console.log("response json", json);
+          this.setState({ notes: json.notes });
+        })
+      )
+      .catch(err => {
+        console.log("error", err);
+        this.setState({ notes: mockNotes });
+      });
   }
 
   addNote = (title, body, color) => {

@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 // TODO: expire tokens and perform health check
 const setSessionToken = token => {
@@ -54,6 +55,11 @@ const Login = ({ setToken, token }) => {
       </button>
     </div>
   );
+};
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired
 };
 
 export default Login;

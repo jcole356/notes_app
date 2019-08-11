@@ -6,8 +6,6 @@ import Dialog from "./Dialog";
 import Header from "./Header";
 import NoteModal from "./NoteModal";
 
-import mockNotes from "./mocks/notes";
-
 const DEFAULT_NOTE = {
   id: uuidv1(),
   body: "Just start typing here",
@@ -33,6 +31,13 @@ export default class Container extends React.Component {
     // eslint-disable-next-line no-undef
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
+    // eslint-disable-next-line no-undef
+    const token = sessionStorage.getItem("JWT");
+    // eslint-disable-next-line
+    myHeaders.append(
+      "Authorization",
+      `bearer ${token}`
+    );
 
     const myInit = {
       method: "GET",
@@ -40,8 +45,9 @@ export default class Container extends React.Component {
       cache: "default"
     };
 
+    // TODO: stop hardcoding the user_id
     // eslint-disable-next-line no-undef
-    const myRequest = new Request("http://localhost:3000/api/users/1");
+    const myRequest = new Request("http://localhost:3000/api/users/1/notes");
 
     // eslint-disable-next-line no-undef
     fetch(myRequest, myInit)
@@ -53,7 +59,7 @@ export default class Container extends React.Component {
       )
       .catch(err => {
         console.log("error", err);
-        this.setState({ notes: mockNotes });
+        console.log("I am getting an error here");
       });
   }
 
@@ -159,6 +165,7 @@ export default class Container extends React.Component {
         <Header
           addNote={this.handleAddNoteClick}
           className="header-container"
+          logout={this.props.logout}
         />
         <Body
           notes={notes}

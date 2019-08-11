@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import Container from "./Container";
 import Login from "./Login";
+
 import "../css/main.css";
 
-const protectedRoute = (token, setToken) => {
+function ProtectedRoute({ setToken, token }) {
   return (
     <Route
       exact
@@ -16,16 +18,21 @@ const protectedRoute = (token, setToken) => {
       }
     />
   );
+}
+
+ProtectedRoute.propTypes = {
+  setToken: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired
 };
 
-// TODO: token needs to be store in state for logout to work
+// TODO: could just store authState as a boolean instead of storing the token
 function Page() {
   // eslint-disable-next-line no-undef
   const [token, setToken] = useState(sessionStorage.getItem("JWT"));
-  console.log("token", token);
+
   return (
     <Router>
-      {protectedRoute(token, setToken)}
+      <ProtectedRoute setToken={setToken} token={token} />
       <Route
         path="/login"
         // TODO: sort

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import uuidv1 from "uuid/v1";
 
 import Body from "./Body";
@@ -13,7 +14,7 @@ const DEFAULT_NOTE = {
   title: "Untitled"
 };
 
-export default class Container extends React.Component {
+export default class Container extends Component {
   constructor(props) {
     super(props);
 
@@ -26,7 +27,7 @@ export default class Container extends React.Component {
     };
   }
 
-  // TODO: create a new API layer
+  // TODO: create an API service
   componentDidMount() {
     // eslint-disable-next-line no-undef
     const myHeaders = new Headers();
@@ -34,10 +35,7 @@ export default class Container extends React.Component {
     // eslint-disable-next-line no-undef
     const token = sessionStorage.getItem("JWT");
     // eslint-disable-next-line
-    myHeaders.append(
-      "Authorization",
-      `bearer ${token}`
-    );
+    myHeaders.append("Authorization", `bearer ${token}`);
 
     const myInit = {
       method: "GET",
@@ -150,6 +148,7 @@ export default class Container extends React.Component {
   };
 
   render() {
+    const { logout } = this.props;
     const {
       edit,
       notes,
@@ -165,7 +164,7 @@ export default class Container extends React.Component {
         <Header
           addNote={this.handleAddNoteClick}
           className="header-container"
-          logout={this.props.logout}
+          logout={logout}
         />
         <Body
           notes={notes}
@@ -194,3 +193,7 @@ export default class Container extends React.Component {
     );
   }
 }
+
+Container.propTypes = {
+  logout: PropTypes.func.isRequired
+};

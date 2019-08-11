@@ -40,11 +40,12 @@ export default function Card({ body, color, deleteNote, editNote, id, title }) {
   );
 }
 
+// TODO: why is this not shared
 Card.propTypes = {
   body: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
   deleteNote: PropTypes.func.isRequired,
   editNote: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   title: PropTypes.string.isRequired
 };

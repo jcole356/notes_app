@@ -27,7 +27,7 @@ export default function Body({ deleteNote, editNote, notes }) {
 export const noteType = PropTypes.shape({
   body: PropTypes.string.isRequired,
   color: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   title: PropTypes.string.isRequired
 });
 

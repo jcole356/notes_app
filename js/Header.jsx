@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import MediaQuery from "react-responsive";
 import Button from "./Button";
 
-const endSession = (logout) => {
+const endSession = logout => {
   logout("");
   // eslint-disable-next-line no-undef
   sessionStorage.setItem("JWT", "");
@@ -35,5 +35,6 @@ export default function Header({ addNote, logout }) {
 }
 
 Header.propTypes = {
-  addNote: PropTypes.func.isRequired
+  addNote: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };

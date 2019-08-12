@@ -3,33 +3,25 @@ import PropTypes from "prop-types";
 
 import Card from "./Card";
 
+import noteType from "./types";
+
 export default function Body({ deleteNote, editNote, notes }) {
   return (
     <div className="body">
       {notes.map(note => {
-        const { body, color, id, title } = note;
+        const { id } = note;
         return (
           <Card
-            body={body}
-            color={color}
             deleteNote={deleteNote}
             editNote={editNote}
-            id={id}
             key={id}
-            title={title}
+            note={note}
           />
         );
       })}
     </div>
   );
 }
-
-export const noteType = PropTypes.shape({
-  body: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
-});
 
 Body.propTypes = {
   deleteNote: PropTypes.func.isRequired,

@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import Button from "./Button";
 import ColorPicker from "./ColorPicker";
 
-import { noteType } from "./Body";
+import noteType from "./types";
 
 const DEFAULT_NOTE_COLOR = "red";
 const DEFAULT_NOTE_STATE = {

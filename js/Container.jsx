@@ -1,12 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import uuidv1 from "uuid/v1";
 
 import Body from "./Body";
 import Dialog from "./Dialog";
 import Header from "./Header";
 import NoteModal from "./NoteModal";
-
-import mockNotes from "./mocks/notes";
 
 const DEFAULT_NOTE = {
   id: uuidv1(),
@@ -15,16 +14,51 @@ const DEFAULT_NOTE = {
   title: "Untitled"
 };
 
-export default class Container extends React.Component {
+export default class Container extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       edit: false,
-      notes: mockNotes,
+      notes: [],
       openDeleteModal: false,
       openNoteModal: false,
       selectedNoteId: null
     };
+  }
+
+  // TODO: create an API service
+  componentDidMount() {
+    // eslint-disable-next-line no-undef
+    const myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    // eslint-disable-next-line no-undef
+    const token = sessionStorage.getItem("JWT");
+    // eslint-disable-next-line
+    myHeaders.append("Authorization", `bearer ${token}`);
+
+    const myInit = {
+      method: "GET",
+      headers: myHeaders,
+      cache: "default"
+    };
+
+    // TODO: stop hardcoding the user_id
+    // eslint-disable-next-line no-undef
+    const myRequest = new Request("http://localhost:3000/api/users/1/notes");
+
+    // eslint-disable-next-line no-undef
+    fetch(myRequest, myInit)
+      .then(response =>
+        response.json().then(json => {
+          console.log("response json", json);
+          this.setState({ notes: json.notes });
+        })
+      )
+      .catch(err => {
+        console.log("error", err);
+        console.log("I am getting an error here");
+      });
   }
 
   addNote = (title, body, color) => {
@@ -114,6 +148,7 @@ export default class Container extends React.Component {
   };
 
   render() {
+    const { logout } = this.props;
     const {
       edit,
       notes,
@@ -129,6 +164,7 @@ export default class Container extends React.Component {
         <Header
           addNote={this.handleAddNoteClick}
           className="header-container"
+          logout={logout}
         />
         <Body
           notes={notes}
@@ -157,3 +193,7 @@ export default class Container extends React.Component {
     );
   }
 }
+
+Container.propTypes = {
+  logout: PropTypes.func.isRequired
+};

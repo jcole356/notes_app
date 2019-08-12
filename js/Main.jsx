@@ -35,8 +35,7 @@ function Page() {
       <ProtectedRoute setToken={setToken} token={token} />
       <Route
         path="/login"
-        // TODO: sort
-        render={() => <Login token={token} setToken={setToken} />}
+        render={() => <Login setToken={setToken} token={token} />}
       />
     </Router>
   );

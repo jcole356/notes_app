@@ -8,7 +8,6 @@ const setSessionToken = token => {
   sessionStorage.setItem("JWT", token);
 };
 
-// TODO: props types
 const login = setToken => {
   // eslint-disable-next-line no-undef
   const myHeaders = new Headers();
@@ -44,8 +43,7 @@ const login = setToken => {
     });
 };
 
-// TODO: props types
-const Login = ({ setToken, token }) => {
+function Login({ setToken, token }) {
   return token ? (
     <Redirect to="/" />
   ) : (
@@ -55,7 +53,7 @@ const Login = ({ setToken, token }) => {
       </button>
     </div>
   );
-};
+}
 
 Login.propTypes = {
   setToken: PropTypes.func.isRequired,

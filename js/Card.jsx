@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 
 import Button from "./Button";
 
-export default function Card({ body, color, deleteNote, editNote, id, title }) {
+import noteType from "./types";
+
+export default function Card({ deleteNote, editNote, note }) {
+  const { body, color, id, title } = note;
   return (
     <div className="card" style={{ backgroundColor: color }}>
       <div className="card-header">
@@ -40,12 +43,8 @@ export default function Card({ body, color, deleteNote, editNote, id, title }) {
   );
 }
 
-// TODO: why is this not shared
 Card.propTypes = {
-  body: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
   deleteNote: PropTypes.func.isRequired,
   editNote: PropTypes.func.isRequired,
-  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
-  title: PropTypes.string.isRequired
+  note: noteType.isRequired
 };

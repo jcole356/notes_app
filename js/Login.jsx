@@ -4,12 +4,10 @@ import { Redirect } from "react-router-dom";
 
 // TODO: expire tokens and perform health check
 const setSessionToken = token => {
-  // eslint-disable-next-line no-undef
   sessionStorage.setItem("JWT", token);
 };
 
 const login = setToken => {
-  // eslint-disable-next-line no-undef
   const myHeaders = new Headers();
   myHeaders.append("Accept", "application/json");
 
@@ -20,12 +18,10 @@ const login = setToken => {
   };
 
   // TODO: need to dynamically set the params
-  // eslint-disable-next-line no-undef
   const myRequest = new Request(
     "http://localhost:3000/api/login?username=testy&password=password"
   );
 
-  // eslint-disable-next-line no-undef
   fetch(myRequest, myInit)
     .then(response =>
       response.json().then(json => {

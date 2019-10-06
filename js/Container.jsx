@@ -29,12 +29,9 @@ export default class Container extends Component {
 
   // TODO: create an API service
   componentDidMount() {
-    // eslint-disable-next-line no-undef
     const myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
-    // eslint-disable-next-line no-undef
     const token = sessionStorage.getItem("JWT");
-    // eslint-disable-next-line
     myHeaders.append("Authorization", `bearer ${token}`);
 
     const myInit = {
@@ -44,10 +41,8 @@ export default class Container extends Component {
     };
 
     // TODO: stop hardcoding the user_id
-    // eslint-disable-next-line no-undef
     const myRequest = new Request("http://localhost:3000/api/users/1/notes");
 
-    // eslint-disable-next-line no-undef
     fetch(myRequest, myInit)
       .then(response =>
         response.json().then(json => {

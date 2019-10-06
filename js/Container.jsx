@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import uuidv1 from "uuid/v1";
 
+import { getUserNotes } from "./services/api";
 import Body from "./Body";
 import Dialog from "./Dialog";
 import Header from "./Header";
@@ -27,33 +28,17 @@ export default class Container extends Component {
     };
   }
 
-  // TODO: create an API service
   componentDidMount() {
-    const myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    const token = sessionStorage.getItem("JWT");
-    myHeaders.append("Authorization", `bearer ${token}`);
-
-    const myInit = {
-      method: "GET",
-      headers: myHeaders,
-      cache: "default"
-    };
-
-    // TODO: stop hardcoding the user_id
-    const myRequest = new Request("http://localhost:3000/api/users/1/notes");
-
-    fetch(myRequest, myInit)
-      .then(response =>
-        response.json().then(json => {
-          console.log("response json", json);
+    getUserNotes("1").then(response =>
+      response
+        .json()
+        .then(json => {
           this.setState({ notes: json.notes });
         })
-      )
-      .catch(err => {
-        console.log("error", err);
-        console.log("I am getting an error here");
-      });
+        .catch(err => {
+          console.log("error from container", err);
+        })
+    );
   }
 
   addNote = (title, body, color) => {

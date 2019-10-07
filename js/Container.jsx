@@ -28,6 +28,7 @@ export default class Container extends Component {
     };
   }
 
+  // TODO: remove hardcoded userId
   componentDidMount() {
     getUserNotes("1").then(response =>
       response

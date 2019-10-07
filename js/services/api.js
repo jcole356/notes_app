@@ -6,20 +6,40 @@ const defaultHeaders = () => {
   return myHeaders;
 };
 
-const configureRequest = (method, headers) => {
-  return {
+const configureRequest = (method, headers, body) => {
+  const config = {
     method,
     headers,
     cache: "default"
   };
+  if (body) {
+    config.body = body;
+  }
+
+  console.log('config', config);
+  return config;
 };
 
-// TODO: once you add a second one here, should be fine
-// eslint-disable-next-line import/prefer-default-export
+// TODO: this endpoint should be updated to get the current user from the token
+// TODO: create a base URL
 export const getUserNotes = userId => {
   const request = new Request(
     `http://localhost:3000/api/users/${userId}/notes`
   );
   const init = configureRequest("GET", defaultHeaders());
+
+  return fetch(request, init);
+};
+
+// TOOD: try to use request body
+export const login = (username, password) => {
+  const request = new Request(
+    `http://localhost:3000/api/login?username=${username}&password=${password}`
+  );
+  // const body = { username, password };
+  // const init = configureRequest("POST", defaultHeaders(), JSON.stringify(body));
+  const init = configureRequest("POST", defaultHeaders());
+  console.log("init", init);
+
   return fetch(request, init);
 };

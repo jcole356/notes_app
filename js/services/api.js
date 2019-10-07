@@ -1,22 +1,27 @@
-const defaultHeaders = () => {
+const baseHeaders = () => {
   const myHeaders = new Headers();
   myHeaders.append("Accept", "application/json");
-  const token = sessionStorage.getItem("JWT");
-  myHeaders.append("Authorization", `bearer ${token}`);
+
   return myHeaders;
 };
 
-const configureRequest = (method, headers, body) => {
+const defaultHeaders = () => {
+  const headers = baseHeaders();
+  const token = sessionStorage.getItem("JWT");
+  headers.append("Authorization", `bearer ${token}`);
+  return headers;
+};
+
+const configureRequest = (method, headers, data) => {
   const config = {
     method,
     headers,
     cache: "default"
   };
-  if (body) {
-    config.body = body;
+  if (data) {
+    config.body = JSON.stringify(data);
   }
 
-  console.log('config', config);
   return config;
 };
 
@@ -31,15 +36,11 @@ export const getUserNotes = userId => {
   return fetch(request, init);
 };
 
-// TOOD: try to use request body
 export const login = (username, password) => {
   const request = new Request(
     `http://localhost:3000/api/login?username=${username}&password=${password}`
   );
-  // const body = { username, password };
-  // const init = configureRequest("POST", defaultHeaders(), JSON.stringify(body));
-  const init = configureRequest("POST", defaultHeaders());
-  console.log("init", init);
+  const init = configureRequest("POST", baseHeaders());
 
   return fetch(request, init);
 };

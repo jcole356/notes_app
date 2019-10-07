@@ -6,7 +6,6 @@ import Button from "./Button";
 
 const endSession = logout => {
   logout("");
-  // eslint-disable-next-line no-undef
   sessionStorage.setItem("JWT", "");
 };
 

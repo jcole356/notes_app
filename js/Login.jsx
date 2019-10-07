@@ -2,31 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 
+import { login as loginApi } from "./services/api";
+
 // TODO: expire tokens and perform health check
 const setSessionToken = token => {
-  // eslint-disable-next-line no-undef
   sessionStorage.setItem("JWT", token);
 };
 
 const login = setToken => {
-  // eslint-disable-next-line no-undef
-  const myHeaders = new Headers();
-  myHeaders.append("Accept", "application/json");
-
-  const myInit = {
-    method: "POST",
-    headers: myHeaders,
-    cache: "default"
-  };
-
-  // TODO: need to dynamically set the params
-  // eslint-disable-next-line no-undef
-  const myRequest = new Request(
-    "http://localhost:3000/api/login?username=testy&password=password"
-  );
-
-  // eslint-disable-next-line no-undef
-  fetch(myRequest, myInit)
+  loginApi("testy", "password")
     .then(response =>
       response.json().then(json => {
         console.log("response json", json);
@@ -38,8 +22,7 @@ const login = setToken => {
       })
     )
     .catch(err => {
-      console.log("error", err);
-      console.log("I am getting an error here");
+      console.log("error from login", err);
     });
 };
 

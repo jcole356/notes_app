@@ -27,7 +27,6 @@ ProtectedRoute.propTypes = {
 
 // TODO: could just store authState as a boolean instead of storing the token
 function Page() {
-  // eslint-disable-next-line no-undef
   const [token, setToken] = useState(sessionStorage.getItem("JWT"));
 
   return (
@@ -41,7 +40,6 @@ function Page() {
   );
 }
 
-// eslint-disable-next-line no-undef
 ReactDOM.render(<Page />, document.getElementById("root"));
 
 if (module.hot) {

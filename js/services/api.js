@@ -1,6 +1,8 @@
 const baseHeaders = () => {
   const myHeaders = new Headers();
+  // TODO: what is the difference between Accept and Content-Type?
   myHeaders.append("Accept", "application/json");
+  myHeaders.append("Content-Type", "application/json");
 
   return myHeaders;
 };
@@ -27,6 +29,15 @@ const configureRequest = (method, headers, data) => {
 };
 
 // TODO: create a base URL
+export const createUserNote = (userId, note) => {
+  const request = new Request(
+    `http://localhost:3000/api/users/${userId}/notes`
+  );
+  const init = configureRequest("POST", defaultHeaders(), note);
+
+  return fetch(request, init);
+};
+
 export const getUserNotes = userId => {
   const request = new Request(
     `http://localhost:3000/api/users/${userId}/notes`

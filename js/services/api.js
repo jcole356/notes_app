@@ -9,6 +9,7 @@ const defaultHeaders = () => {
   const headers = baseHeaders();
   const token = sessionStorage.getItem("JWT");
   headers.append("Authorization", `bearer ${token}`);
+
   return headers;
 };
 
@@ -25,7 +26,6 @@ const configureRequest = (method, headers, data) => {
   return config;
 };
 
-// TODO: this endpoint should be updated to get the current user from the token
 // TODO: create a base URL
 export const getUserNotes = userId => {
   const request = new Request(

@@ -1,6 +1,5 @@
 const baseHeaders = () => {
   const myHeaders = new Headers();
-  // TODO: what is the difference between Accept and Content-Type?
   myHeaders.append("Accept", "application/json");
   myHeaders.append("Content-Type", "application/json");
 

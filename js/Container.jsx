@@ -5,6 +5,7 @@ import uuidv1 from "uuid/v1";
 import {
   createUserNote,
   deleteNote as deleteNoteApi,
+  editNote as editNoteApi,
   getUserNotes
 } from "./services/api";
 import Body from "./Body";
@@ -80,23 +81,32 @@ export default class Container extends Component {
   };
 
   editNote = (title, body, color) => {
-    const { selectedNoteId, notes } = this.state;
+    const { selectedNoteId } = this.state;
     this.handleAddNoteClick();
-    const findNote = notes.find(note => {
-      return note.id === selectedNoteId;
-    });
-    const idx = notes.indexOf(findNote);
-    notes[idx] = {
-      title,
-      id: selectedNoteId,
-      body,
-      color
-    };
+    this.updateNote(selectedNoteId, title, body, color);
     this.setState({
       edit: false,
       selectedNoteId: null,
-      notes,
       openNoteModal: false
+    });
+    editNoteApi(selectedNoteId, { title, body, color }).then(response =>
+      response.json().then(json => {
+        const {
+          id: responseId,
+          title: responseTitle,
+          body: responseBody,
+          color: responseColor
+        } = json.note;
+        this.updateNote(responseId, responseTitle, responseBody, responseColor);
+      })
+    );
+  };
+
+  findNote = id => {
+    const { notes } = this.state;
+
+    return notes.find(note => {
+      return note.id === id;
     });
   };
 
@@ -134,6 +144,21 @@ export default class Container extends Component {
       edit: true,
       selectedNoteId: id,
       openNoteModal: true
+    });
+  };
+
+  updateNote = (id, title, body, color) => {
+    const { notes } = this.state;
+    const note = this.findNote(id);
+    const idx = notes.indexOf(note);
+    notes[idx] = {
+      title,
+      id,
+      body,
+      color
+    };
+    this.setState({
+      notes
     });
   };
 

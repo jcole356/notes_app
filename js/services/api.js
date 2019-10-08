@@ -44,6 +44,13 @@ export const deleteNote = noteId => {
   return fetch(request, init);
 };
 
+export const editNote = (noteId, note) => {
+  const request = new Request(`http://localhost:3000/api/notes/${noteId}`);
+  const init = configureRequest("PUT", defaultHeaders(), note);
+
+  return fetch(request, init);
+};
+
 export const getUserNotes = userId => {
   const request = new Request(
     `http://localhost:3000/api/users/${userId}/notes`

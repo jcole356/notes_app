@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import uuidv1 from "uuid/v1";
 
-import { getUserNotes } from "./services/api";
+import { createUserNote, getUserNotes } from "./services/api";
 import Body from "./Body";
 import Dialog from "./Dialog";
 import Header from "./Header";
@@ -54,6 +54,7 @@ export default class Container extends Component {
       openNoteModal: false,
       selectedNoteId: null
     });
+    createUserNote("current", { title, body, color });
   };
 
   cancelDelete = () => {

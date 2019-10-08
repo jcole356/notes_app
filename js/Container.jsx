@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import uuidv1 from "uuid/v1";
 
-import { createUserNote, getUserNotes } from "./services/api";
+import {
+  createUserNote,
+  deleteNote as deleteNoteApi,
+  getUserNotes
+} from "./services/api";
 import Body from "./Body";
 import Dialog from "./Dialog";
 import Header from "./Header";
@@ -43,7 +47,7 @@ export default class Container extends Component {
 
   addNote = (title, body, color) => {
     const { notes } = this.state;
-    notes.unshift({
+    notes.push({
       body,
       color,
       id: uuidv1(),
@@ -54,7 +58,11 @@ export default class Container extends Component {
       openNoteModal: false,
       selectedNoteId: null
     });
-    createUserNote("current", { title, body, color });
+    createUserNote("current", { title, body, color }).then(response =>
+      response.json().then(json => {
+        this.setState({ notes: json.notes });
+      })
+    );
   };
 
   cancelDelete = () => {
@@ -104,6 +112,7 @@ export default class Container extends Component {
       notes,
       openDeleteModal: false
     });
+    deleteNoteApi(selectedNoteId);
   };
 
   handleAddNoteClick = () => {

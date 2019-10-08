@@ -37,6 +37,13 @@ export const createUserNote = (userId, note) => {
   return fetch(request, init);
 };
 
+export const deleteNote = noteId => {
+  const request = new Request(`http://localhost:3000/api/notes/${noteId}`);
+  const init = configureRequest("DELETE", defaultHeaders());
+
+  return fetch(request, init);
+};
+
 export const getUserNotes = userId => {
   const request = new Request(
     `http://localhost:3000/api/users/${userId}/notes`

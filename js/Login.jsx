@@ -9,8 +9,8 @@ const setSessionToken = token => {
   sessionStorage.setItem("JWT", token);
 };
 
-const login = setToken => {
-  loginApi("testy", "password")
+const login = ({ username, password }, setToken) => {
+  loginApi(username, password)
     .then(response =>
       response.json().then(json => {
         console.log("response json", json);
@@ -31,9 +31,24 @@ function Login({ setToken, token }) {
     <Redirect to="/" />
   ) : (
     <div>
-      <button onClick={() => login(setToken)} type="button">
-        Login
-      </button>
+      <form
+        onSubmit={e => {
+          e.preventDefault();
+          const username = e.target[0].value;
+          const password = e.target[1].value;
+          login({ username, password }, setToken);
+        }}
+      >
+        <label htmlFor="username">
+          Username:
+          <input id="username" type="text" />
+        </label>
+        <label htmlFor="password">
+          Password:
+          <input id="password" type="password" />
+        </label>
+        <input name="Submit" type="submit" />
+      </form>
     </div>
   );
 }

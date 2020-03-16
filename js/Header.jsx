@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import MediaQuery from "react-responsive";
+
 import Button from "./Button";
 
 const endSession = logout => {
@@ -10,7 +10,6 @@ const endSession = logout => {
 };
 
 export default function Header({ addNote, logout }) {
-  // TODO: use media query to change button text
   // TODO: stop adding the undefined class to some instances of the button
   return (
     <div>
@@ -23,10 +22,14 @@ export default function Header({ addNote, logout }) {
       <MediaQuery query="(min-width: 768px)">
         <div className="header">
           <div className="header-title">Notes</div>
-          <button onClick={() => endSession(logout)} type="button">
-            Logout
-          </button>
-          <Button active onClick={addNote} text="+ Add Note" />
+          <div className="header-buttons">
+            <Button
+              action="logout"
+              icon="fa fa-sign-out"
+              onClick={() => endSession(logout)}
+            />
+            <Button active onClick={addNote} text="+ Add Note" />
+          </div>
         </div>
       </MediaQuery>
     </div>

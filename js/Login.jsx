@@ -30,7 +30,8 @@ function Login({ setToken, token }) {
   return token ? (
     <Redirect to="/" />
   ) : (
-    <div>
+    <div className="login-page">
+      <h4>Todoozer</h4>
       <form
         onSubmit={e => {
           e.preventDefault();
@@ -47,7 +48,9 @@ function Login({ setToken, token }) {
           Password:
           <input id="password" type="password" />
         </label>
-        <input name="Submit" type="submit" />
+        <button className="login-button" name="Submit" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

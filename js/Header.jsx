@@ -1,11 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import MediaQuery from "react-responsive";
+
 import Button from "./Button";
 
-export default function Header({ addNote }) {
-  // TODO: use media query to change button text
+const endSession = logout => {
+  logout("");
+  sessionStorage.setItem("JWT", "");
+};
+
+export default function Header({ addNote, logout }) {
   // TODO: stop adding the undefined class to some instances of the button
   return (
     <div>
@@ -18,7 +22,14 @@ export default function Header({ addNote }) {
       <MediaQuery query="(min-width: 768px)">
         <div className="header">
           <div className="header-title">Notes</div>
-          <Button active onClick={addNote} text="+ Add Note" />
+          <div className="header-buttons">
+            <Button
+              action="logout"
+              icon="fa fa-sign-out"
+              onClick={() => endSession(logout)}
+            />
+            <Button active onClick={addNote} text="+ Add Note" />
+          </div>
         </div>
       </MediaQuery>
     </div>
@@ -26,5 +37,6 @@ export default function Header({ addNote }) {
 }
 
 Header.propTypes = {
-  addNote: PropTypes.func.isRequired
+  addNote: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };

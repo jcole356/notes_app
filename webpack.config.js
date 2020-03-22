@@ -15,14 +15,14 @@ module.exports = {
     extensions: [".js", ".jsx"]
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /.jsx?$/,
         loader: "babel-loader",
         exclude: /node_modules/,
-        query: {
-          presets: ["env", "react"],
-          plugins: ["transform-class-properties"]
+        options: {
+          presets: ["@babel/preset-env", "@babel/preset-react"],
+          plugins: ["@babel/plugin-proposal-class-properties"]
         }
       },
       {

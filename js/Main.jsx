@@ -27,7 +27,7 @@ ProtectedRoute.propTypes = {
 
 // TODO: could just store authState as a boolean instead of storing the token
 function Page() {
-  const [token, setToken] = useState(sessionStorage.getItem("JWT"));
+  const [token, setToken] = useState(sessionStorage.getItem("JWT") || "");
 
   return (
     <Router>

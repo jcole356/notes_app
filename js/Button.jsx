@@ -17,7 +17,8 @@ export default function Button({ action, active, icon, onClick, text }) {
 Button.defaultProps = {
   action: "",
   active: true,
-  icon: undefined
+  icon: undefined,
+  text: ""
 };
 
 Button.propTypes = {
@@ -25,5 +26,5 @@ Button.propTypes = {
   active: PropTypes.bool,
   icon: PropTypes.string,
   onClick: PropTypes.func.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string
 };

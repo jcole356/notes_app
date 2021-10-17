@@ -30,7 +30,7 @@ const configureRequest = (method, headers, data) => {
 // TODO: create a base URL
 export const createUserNote = (userId, note) => {
   const request = new Request(
-    `http://localhost:3000/api/users/${userId}/notes`
+    `${process.env.API_URL}/api/users/${userId}/notes`
   );
   const init = configureRequest("POST", defaultHeaders(), note);
 
@@ -38,14 +38,14 @@ export const createUserNote = (userId, note) => {
 };
 
 export const deleteNote = noteId => {
-  const request = new Request(`http://localhost:3000/api/notes/${noteId}`);
+  const request = new Request(`${process.env.API_URL}/api/notes/${noteId}`);
   const init = configureRequest("DELETE", defaultHeaders());
 
   return fetch(request, init);
 };
 
 export const editNote = (noteId, note) => {
-  const request = new Request(`http://localhost:3000/api/notes/${noteId}`);
+  const request = new Request(`${process.env.API_URL}/api/notes/${noteId}`);
   const init = configureRequest("PUT", defaultHeaders(), note);
 
   return fetch(request, init);
@@ -53,7 +53,7 @@ export const editNote = (noteId, note) => {
 
 export const getUserNotes = userId => {
   const request = new Request(
-    `http://localhost:3000/api/users/${userId}/notes`
+    `${process.env.API_URL}/api/users/${userId}/notes`
   );
   const init = configureRequest("GET", defaultHeaders());
 
@@ -62,7 +62,7 @@ export const getUserNotes = userId => {
 
 export const login = (username, password) => {
   const request = new Request(
-    `http://localhost:3000/api/login?username=${username}&password=${password}`
+    `${process.env.API_URL}/api/login?username=${username}&password=${password}`
   );
   const init = configureRequest("POST", baseHeaders());
 

@@ -1,20 +1,21 @@
 const path = require("path");
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./js/Main.jsx",
   output: {
     path: path.resolve(__dirname, "./dist/"),
-    filename: "bundle.js"
+    filename: "bundle.js",
   },
   devServer: {
     contentBase: path.join(__dirname, "./dist/"),
     historyApiFallback: true,
-    hot: true
+    hot: true,
   },
   devtool: "source-map",
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
@@ -24,14 +25,19 @@ module.exports = {
         exclude: /node_modules/,
         options: {
           presets: ["@babel/preset-env", "@babel/preset-react"],
-          plugins: ["@babel/plugin-proposal-class-properties"]
-        }
+          plugins: ["@babel/plugin-proposal-class-properties"],
+        },
       },
       {
         test: /.css$/,
-        loader: ["style-loader", "css-loader"]
-      }
-    ]
+        loader: ["style-loader", "css-loader"],
+      },
+    ],
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: "./index.html",
+    }),
+  ],
 };

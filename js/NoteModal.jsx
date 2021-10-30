@@ -4,7 +4,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Button from "./Button";
+import Button from "./Button.tsx";
 import ColorPicker from "./ColorPicker";
 
 import noteType from "./types";

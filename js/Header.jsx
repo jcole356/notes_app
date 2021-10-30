@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import MediaQuery from "react-responsive";
 
-import Button from "./Button";
+import Button from "./Button.tsx";
 
 const endSession = logout => {
   logout("");
@@ -25,6 +25,7 @@ export default function Header({ addNote, logout }) {
           <div className="header-buttons">
             <Button
               action="logout"
+              active
               icon="fa fa-sign-out"
               onClick={() => endSession(logout)}
             />

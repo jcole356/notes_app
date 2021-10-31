@@ -1,7 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-require("dotenv").config();
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: "./js/Main.jsx",
@@ -9,8 +9,9 @@ module.exports = {
     path: path.resolve(__dirname, "./dist/"),
     filename: "bundle.js",
   },
+  mode: "none",
   devServer: {
-    contentBase: path.join(__dirname, "./dist/"),
+    static: path.join(__dirname, "./dist/"),
     historyApiFallback: true,
     hot: true,
   },
@@ -32,11 +33,11 @@ module.exports = {
       {
         test: /.tsx?$/,
         loader: "ts-loader",
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /.css$/,
-        loader: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
     ],
   },
@@ -45,8 +46,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./index.html",
     }),
-    new webpack.DefinePlugin({
-      "process.env": JSON.stringify(process.env),
-    }),
+    new Dotenv(),
   ],
 };

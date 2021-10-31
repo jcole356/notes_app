@@ -9,8 +9,9 @@ module.exports = {
     path: path.resolve(__dirname, "./dist/"),
     filename: "bundle.js",
   },
+  mode: "none", // TODO
   devServer: {
-    contentBase: path.join(__dirname, "./dist/"),
+    static: path.join(__dirname, "./dist/"),
     historyApiFallback: true,
     hot: true,
   },
@@ -31,7 +32,7 @@ module.exports = {
       },
       {
         test: /.css$/,
-        loader: ["style-loader", "css-loader"],
+        use: [{ loader: "style-loader" }, { loader: "css-loader" }],
       },
     ],
   },

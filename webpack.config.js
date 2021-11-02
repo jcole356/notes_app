@@ -9,7 +9,7 @@ module.exports = {
     path: path.resolve(__dirname, "./dist/"),
     filename: "bundle.js",
   },
-  mode: "none",
+  mode: "production",
   devServer: {
     static: path.join(__dirname, "./dist/"),
     historyApiFallback: true,

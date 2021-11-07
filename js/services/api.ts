@@ -1,4 +1,4 @@
-const baseHeaders = () => {
+const baseHeaders = (): Headers => {
   const myHeaders = new Headers();
   myHeaders.append("Accept", "application/json");
   myHeaders.append("Content-Type", "application/json");
@@ -6,7 +6,7 @@ const baseHeaders = () => {
   return myHeaders;
 };
 
-const defaultHeaders = () => {
+const defaultHeaders = (): Headers => {
   const headers = baseHeaders();
   const token = sessionStorage.getItem("JWT");
   headers.append("Authorization", `bearer ${token}`);
@@ -14,11 +14,22 @@ const defaultHeaders = () => {
   return headers;
 };
 
-const configureRequest = (method, headers, data) => {
-  const config = {
+type RequestInit = {
+  method: string;
+  headers: Headers;
+  cache: RequestCache;
+  body?: string;
+};
+
+const configureRequest = (
+  method: string,
+  headers: Headers,
+  data?: {} // TODO: should probably be a generic
+): RequestInit => {
+  const config: RequestInit = {
     method,
     headers,
-    cache: "default"
+    cache: "default",
   };
   if (data) {
     config.body = JSON.stringify(data);
@@ -28,7 +39,7 @@ const configureRequest = (method, headers, data) => {
 };
 
 // TODO: create a base URL
-export const createUserNote = (userId, note) => {
+export const createUserNote = (userId: number, note: string) => {
   const request = new Request(
     `${process.env.API_URL}/api/users/${userId}/notes`
   );
@@ -37,21 +48,21 @@ export const createUserNote = (userId, note) => {
   return fetch(request, init);
 };
 
-export const deleteNote = noteId => {
+export const deleteNote = (noteId: number) => {
   const request = new Request(`${process.env.API_URL}/api/notes/${noteId}`);
   const init = configureRequest("DELETE", defaultHeaders());
 
   return fetch(request, init);
 };
 
-export const editNote = (noteId, note) => {
+export const editNote = (noteId: number, note: string) => {
   const request = new Request(`${process.env.API_URL}/api/notes/${noteId}`);
   const init = configureRequest("PUT", defaultHeaders(), note);
 
   return fetch(request, init);
 };
 
-export const getUserNotes = userId => {
+export const getUserNotes = (userId: number) => {
   const request = new Request(
     `${process.env.API_URL}/api/users/${userId}/notes`
   );
@@ -60,7 +71,7 @@ export const getUserNotes = userId => {
   return fetch(request, init);
 };
 
-export const login = (username, password) => {
+export const login = (username: string, password: string) => {
   const request = new Request(
     `${process.env.API_URL}/api/login?username=${username}&password=${password}`
   );

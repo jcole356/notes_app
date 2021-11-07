@@ -71,11 +71,26 @@ export const getUserNotes = (userId: number) => {
   return fetch(request, init);
 };
 
-export const login = (username: string, password: string) => {
+export interface AuthParams {
+  email: string;
+  username: string;
+  password: string;
+}
+
+export const login = ({username, password}: AuthParams) => {
   const request = new Request(
     `${process.env.API_URL}/api/login?username=${username}&password=${password}`
   );
   const init = configureRequest("POST", baseHeaders());
+
+  return fetch(request, init);
+};
+
+export const register = (credentials: AuthParams) => {
+  const request = new Request(
+    `${process.env.API_URL}/api/users/new`
+  );
+  const init = configureRequest("POST", baseHeaders(), credentials);
 
   return fetch(request, init);
 };

@@ -34,7 +34,15 @@ function Page() {
       <ProtectedRoute setToken={setToken} token={token} />
       <Route
         path="/login"
-        render={() => <Login setToken={setToken} token={token} />}
+        render={() => (
+          <Login setToken={setToken} token={token} isLoginPage={true} />
+        )}
+      />
+      <Route
+        path="/register"
+        render={() => (
+          <Login setToken={setToken} token={token} isLoginPage={false} />
+        )}
       />
     </Router>
   );

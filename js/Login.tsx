@@ -39,7 +39,10 @@ interface FormState {
 }
 
 function Login({ setToken, token }: Props) {
-  const [formState, setFormState] = useState<FormState>({});
+  const [formState, setFormState] = useState<FormState>({
+    username: '',
+    password: ''
+  });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = e.currentTarget;
@@ -68,7 +71,12 @@ function Login({ setToken, token }: Props) {
         </label>
         <label htmlFor="password">
           Password:
-          <input id="password" name="password" type="password" />
+          <input
+            id="password"
+            name="password"
+            onChange={handleChange}
+            type="password"
+          />
         </label>
         <button className="login-button" name="Submit" type="submit">
           Submit

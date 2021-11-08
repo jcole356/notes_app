@@ -1,6 +1,7 @@
 import React, { FormEvent, Dispatch, SetStateAction, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
+import SignInForm from "./SignIn";
 import SignUpForm from "./SignUp";
 import { login as loginApi, register, AuthParams } from "../services/api";
 
@@ -23,7 +24,6 @@ const login = (
   authCallback(params)
     .then((response) =>
       response.json().then((json) => {
-        console.log("response json", json);
         const { token } = json;
         if (token) {
           setSessionToken(token);
@@ -51,34 +51,13 @@ function Login({ setToken, token, isLoginPage }: Props) {
   let form;
   if (isLoginPage) {
     form = (
-      <form
-        onSubmit={(event: FormEvent) => {
-          event.preventDefault();
-          login(formState, setToken, loginApi);
+      <SignInForm
+        setToken={setToken}
+        handleChange={handleChange}
+        handleSubmit={() => {
+          login(formState, setToken, loginApi)
         }}
-      >
-        <label htmlFor="username">
-          Username:
-          <input
-            id="username"
-            name="username"
-            onChange={handleChange}
-            type="text"
-          />
-        </label>
-        <label htmlFor="password">
-          Password:
-          <input
-            id="password"
-            name="password"
-            onChange={handleChange}
-            type="password"
-          />
-        </label>
-        <button className="login-button" name="Submit" type="submit">
-          Submit
-        </button>
-      </form>
+      />
     );
   } else {
     form = (

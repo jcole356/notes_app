@@ -48,28 +48,7 @@ function Login({ setToken, token, isLoginPage }: Props) {
     setFormState({ ...formState, [name]: value });
   }
 
-  let form;
-  if (isLoginPage) {
-    form = (
-      <SignInForm
-        setToken={setToken}
-        handleChange={handleChange}
-        handleSubmit={() => {
-          login(formState, setToken, loginApi)
-        }}
-      />
-    );
-  } else {
-    form = (
-      <SignUpForm
-        setToken={setToken}
-        handleChange={handleChange}
-        handleSubmit={() => {
-          login(formState, setToken, register)
-        }}
-      />
-    )
-  }
+  const FormComponent = isLoginPage ? SignInForm : SignUpForm;
 
   let link;
   if (isLoginPage) {
@@ -83,7 +62,13 @@ function Login({ setToken, token, isLoginPage }: Props) {
   ) : (
     <div className="login-page">
       <h4>Todoozer</h4>
-      {form}
+      <FormComponent
+        setToken={setToken}
+        handleChange={handleChange}
+        handleSubmit={() => {
+          login(formState, setToken, loginApi)
+        }}
+      />
       {link}
     </div>
   );

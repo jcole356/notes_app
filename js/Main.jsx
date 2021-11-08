@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import Container from "./Container";
-import Login from "./Login";
+import Login from "./Auth/Login";
 
 import "../css/main.css";
 

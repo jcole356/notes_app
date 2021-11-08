@@ -2,7 +2,7 @@ import React, { FormEvent, Dispatch, SetStateAction, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 import SignUpForm from "./SignUp";
-import { login as loginApi, register, AuthParams } from "./services/api";
+import { login as loginApi, register, AuthParams } from "../services/api";
 
 type Props = {
   setToken: Dispatch<SetStateAction<string>>;

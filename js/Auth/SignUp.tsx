@@ -1,18 +1,12 @@
-import React, { FormEvent } from "react";
+import React from "react";
 
 type Props = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
 };
 
-function SignUpForm({ handleChange, handleSubmit }: Props) {
+function SignUpForm({ handleChange }: Props) {
   return (
-    <form
-      onSubmit={(event: FormEvent) => {
-        event.preventDefault();
-        handleSubmit();
-      }}
-    >
+    <>
       <label htmlFor="username">
         Username:
         <input
@@ -24,12 +18,7 @@ function SignUpForm({ handleChange, handleSubmit }: Props) {
       </label>
       <label htmlFor="email">
         Email:
-        <input
-          id="email"
-          name="email"
-          onChange={handleChange}
-          type="text"
-        />
+        <input id="email" name="email" onChange={handleChange} type="text" />
       </label>
       <label htmlFor="password">
         Password:
@@ -43,7 +32,7 @@ function SignUpForm({ handleChange, handleSubmit }: Props) {
       <button className="login-button" name="Submit" type="submit">
         Submit
       </button>
-    </form>
+    </>
   );
 }
 

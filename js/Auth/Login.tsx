@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, FormEvent, SetStateAction, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 
 import SignInForm from "./SignIn";
@@ -38,9 +38,9 @@ const login = (
 
 function Login({ setToken, token, isLoginPage }: Props) {
   const [formState, setFormState] = useState<AuthParams>({
-    email: '',
-    username: '',
-    password: ''
+    email: "",
+    username: "",
+    password: "",
   });
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -52,13 +52,21 @@ function Login({ setToken, token, isLoginPage }: Props) {
   let FormComponent;
   let submitApi: (credentials: AuthParams) => Promise<Response>;
   if (isLoginPage) {
-    link = <Link className="auth-link" to="/register">Need an account?</Link>;
-    FormComponent = SignInForm
-    submitApi = loginApi
+    link = (
+      <Link className="auth-link" to="/register">
+        Need an account?
+      </Link>
+    );
+    FormComponent = SignInForm;
+    submitApi = loginApi;
   } else {
-    link = <Link className="auth-link" to="/login">Already have an account?</Link>;
-    FormComponent = SignUpForm
-    submitApi = register
+    link = (
+      <Link className="auth-link" to="/login">
+        Already have an account?
+      </Link>
+    );
+    FormComponent = SignUpForm;
+    submitApi = register;
   }
 
   return token ? (
@@ -66,12 +74,14 @@ function Login({ setToken, token, isLoginPage }: Props) {
   ) : (
     <div className="login-page">
       <h4>Todoozer</h4>
-      <FormComponent
-        handleChange={handleChange}
-        handleSubmit={() => {
-          login(formState, setToken, submitApi)
+      <form
+        onSubmit={(event: FormEvent) => {
+          event.preventDefault();
+          login(formState, setToken, submitApi);
         }}
-      />
+      >
+        <FormComponent handleChange={handleChange} />
+      </form>
       {link}
     </div>
   );

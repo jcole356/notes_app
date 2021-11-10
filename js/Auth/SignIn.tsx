@@ -1,40 +1,34 @@
-import React, { FormEvent } from "react";
+import React from "react";
 
 type Props = {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
 };
 
-function SignUpForm({ handleChange, handleSubmit }: Props) {
+function SignUpForm({ handleChange }: Props) {
   return (
-    <form
-        onSubmit={(event: FormEvent) => {
-          event.preventDefault();
-          handleSubmit();
-        }}
-      >
-        <label htmlFor="username">
-          Username:
-          <input
-            id="username"
-            name="username"
-            onChange={handleChange}
-            type="text"
-          />
-        </label>
-        <label htmlFor="password">
-          Password:
-          <input
-            id="password"
-            name="password"
-            onChange={handleChange}
-            type="password"
-          />
-        </label>
-        <button className="login-button" name="Submit" type="submit">
-          Submit
-        </button>
-      </form>
+    <>
+      <label htmlFor="username">
+        Username:
+        <input
+          id="username"
+          name="username"
+          onChange={handleChange}
+          type="text"
+        />
+      </label>
+      <label htmlFor="password">
+        Password:
+        <input
+          id="password"
+          name="password"
+          onChange={handleChange}
+          type="password"
+        />
+      </label>
+      <button className="login-button" name="Submit" type="submit">
+        Submit
+      </button>
+    </>
   );
 }
 

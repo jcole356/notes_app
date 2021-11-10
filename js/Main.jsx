@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 
 import Container from "./Container";
-import Login from "./Login";
+import Login from "./Auth/Login";
 
 import "../css/main.css";
 
@@ -34,7 +34,15 @@ function Page() {
       <ProtectedRoute setToken={setToken} token={token} />
       <Route
         path="/login"
-        render={() => <Login setToken={setToken} token={token} />}
+        render={() => (
+          <Login setToken={setToken} token={token} isLoginPage={true} />
+        )}
+      />
+      <Route
+        path="/register"
+        render={() => (
+          <Login setToken={setToken} token={token} isLoginPage={false} />
+        )}
       />
     </Router>
   );

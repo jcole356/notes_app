@@ -1,12 +1,11 @@
-import React, { FormEvent, Dispatch, SetStateAction } from "react";
+import React, { FormEvent } from "react";
 
 type Props = {
-  setToken: Dispatch<SetStateAction<string>>;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: () => void;
 };
 
-function SignUpForm({ setToken, handleChange, handleSubmit }: Props) {
+function SignUpForm({ handleChange, handleSubmit }: Props) {
   return (
     <form
       onSubmit={(event: FormEvent) => {
